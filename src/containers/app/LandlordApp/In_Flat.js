@@ -42,7 +42,7 @@ const getUserDetails=()=>{
 </TouchableOpacity>
     </Col>
     <Col style={{width:120,height:120,margin:6}}>
-<TouchableOpacity>
+<TouchableOpacity onPress={()=>props.navigation.navigate("Camera")}>
     <Image source={require('../../../../assets/FlatPic.jpeg')} style={{width:120,height:120}}/>
     <Text style={{color:'white'}}>Flat Pics</Text>
 </TouchableOpacity>
