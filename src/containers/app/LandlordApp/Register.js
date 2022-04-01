@@ -1,41 +1,24 @@
-import * as React from 'react';
-import {View, Text, StyleSheet,TextInput,TouchableOpacity,Image,ScrollView}from "react-native"
+import React, * as react from 'react';
+import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { useState } from 'react/cjs/react.development';
-import Header from '../../../components/Header';
-import firebase from 'firebase';
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
-import DropDownPicker from 'react-native-dropdown-picker';
-import axios from 'axios';
-import {vw,vh} from "../../../constants";
+import { ScrollView } from 'react-native-gesture-handler';
+import { Col, Row, Grid } from 'react-native-easy-grid';
 import DatePicker from 'react-native-datepicker';
-// camera options
-var options = {
-    title: 'Select Image',
-    customButtons: [
-      {
-        name: 'customOptionKey',
-        title: 'Choose Photo from Custom Option'
-      },
-    ],
-    storageOptions: {
-      skipBackup: true,
-      path: 'images',
-    },
- };
- 
-// sell product function
-const Register = () =>{
+import DropDownPicker from 'react-native-dropdown-picker';
+import firebase from 'firebase';
+import { primaryColor } from '../../../constants';
 
+const Register = (props) => {
     let id = firebase.auth().currentUser.uid
 
-    // states 
-    const[name,setName]=useState("")
-    const[father,setFather]=useState("")
-    const[number,setNumber]=useState("")
-    const[dob,setDob]=useState("")
-    const[cnic,setCnic]=useState("")
-    const [image,setImage]=useState(null)
-
+    const [firstName,setfirstName]=useState('');
+    const [fatherName,setfatherName]=useState('');
+    const [phoneNumber,setphoneNumber]=useState('');
+    const [lastName,setlastName]=useState('');
+    const [cnicNumber,setcnicNumber]=useState('');
+    const [emailAddress,setemailAddress]=useState('');
+    const [Address,setAddress]=useState('');
+//Family Members
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState('');
     const [items, setItems] = useState([
@@ -45,236 +28,270 @@ const Register = () =>{
         {label: '4', value: '4'},
         {label: '5', value: '5'},
       ]);
-
-      const [date, setDate] = useState('09-10-2020');
-    // record submission to firebase
-    const submitRecord = () => {
+      //Room
+    const [Flatopen, setFlatOpen] = useState(false);
+    const [Flatvalue, setFlatValue] = useState('');
+    const [Flatitems, setFlatItems] = useState([
+        {label: '1', value: '1'},
+        {label: '2', value: '2'},
+        {label: '3', value: '3'},
+        {label: '4', value: '4'},
+        {label: '5', value: '5'},
+      ]);
+      // Toilet
+    const [Toiletopen, setToiletOpen] = useState(false);
+    const [Toiletvalue, setToiletValue] = useState('');
+    const [Toiletitems, setToiletItems] = useState([
+        {label: '1', value: '1'},
+        {label: '2', value: '2'},
+        {label: '3', value: '3'},
+        {label: '4', value: '4'},
+        {label: '5', value: '5'},
+      ]);
+    
+      const [DOB, setDob] = useState('01-01-1947');
+      const [date, setDate] = useState('01-01-1947');
+      const SubmitButton = () => {
         firebase.database().ref(`PropertyRegistration/${id}`)
-        .push({
-            name,
-            father,
-            number,
-            dob,
-            cnic,
-            value
-        })
-        .then(response =>{
-            // console.log(response,"RESSSSSSSSSS");
-            setName("")
-            setFather("")
-            setNumber("")
-            setDob("")
-            setCnic("")
-            setValue("")
-           
-        })
-        .catch(eror =>{
-            console.log(eror,"EERRREERRR");
-        }) 
-    }
+          .set({
+              firstName,
+              fatherName,
+              phoneNumber,
+              Address,
+              lastName,
+              cnicNumber,
+              emailAddress,
+              value,
+              DOB,
+              Flatvalue,
+              date
+          })
+          .then(resp=>{
+              setfirstName("")
+              setfatherName("")
+              setphoneNumber("")
+              setAddress("")
+              setlastName("")
+              setcnicNumber("")
+              setemailAddress("")
+              setFlatValue("")
+              setValue("")
+              setDob("01-01-1947")
+              setDate("01-01-1948")
+              alert("saved")
+          })
+          .catch(err=>{
+              console.log(err,"ERRRRR")
+          })
 
-    // image uploader function
-
-
-
+      }
     return(
-        <View style={styles.mainviewstyle}>
-            <Header 
-            heading="Register Your Property"/>
-
-<ScrollView>
-
-<View style={styles.headingview}>
-            <Text style={styles.heading}>
-            Personal Details
-            </Text></View>
-
-            <View style={styles.inputtext}>
-            <TextInput
-            placeholder="Enter Your Name"
-            placeholderTextColor="#ffcc66"
-            style={styles.textstyle}
-            value={name}
-            onChangeText={(main)=>setName(main)}
-            />
-        </View>
-
-        <View style={styles.inputtext}>
-            <TextInput
-            placeholder="Enter Your Father Name"
-            placeholderTextColor="#ffcc66"
-            style={styles.textstyle}
-            value={father}
-            onChangeText={(main)=>setFather(main)}
-            />
-        </View>
-
-        <View style={styles.inputtext}>
-            <TextInput
-            placeholder="Enter Your Mobile Number"
-            placeholderTextColor="#ffcc66"
-            style={styles.textstyle}
-            value={number}
-            keyboardType='numeric'
-            onChangeText={(main)=>setNumber(main)}
-            />
-        </View>
-
-        <View style={[styles.inputtext,{height:70}]}>
-           <Text style={{color:'#ffcc66'}}>Enter Your DOB</Text>
-           <DatePicker
-          style={styles.datePickerStyle}
-          date={date} // Initial date from state
+<View style={styles.MainView}>
+    <View style={styles.smallView}>
+    <Image source={require('../../../../assets/Logo.jpg')} style={styles.Logo}/>
+    </View>
+        <Text style={[styles.Heading,{marginBottom:12}]}>Registration Form</Text>
+       
+<Text style={{color:'#ffcc66',textAlign:'center',fontSize:34}}>Date 
+   <DatePicker
+          style={[styles.datePickerStyle]}
+          date={date} 
+           // Initial date from state
           mode="date" // The enum of date, datetime and time
-          placeholder="select date"
+          placeholder="Date of Birth"
           format="DD-MM-YYYY"
-          minDate="01-01-2000"
-          maxDate="01-01-2025"
-        //   confirmBtnText="Confirm"
-        //   cancelBtnText="Cancel"
+          minDate="01-01-1947"
+          maxDate="01-01-2022"
+
           customStyles={{
-            dateIcon: {
-              //display: 'none',
-              position: 'absolute',
-              left: 0,
-              top: 4,
-              marginLeft: 205,
-            },
-            dateInput: {
-              marginLeft: 36,
-            },
+          
+            // dateInput: {
+            //   marginLeft: 36,
+            // }, 
           }}
           onDateChange={(date) => {
             setDate(date);
           }}
-        />
-        </View>
-
-        <View style={styles.inputtext}>
+        /> 
+    </Text>
+    <ScrollView>
+    <Grid style={{height:470}}>
+        <Col>
+    <View style={styles.inputtext}>
             <TextInput
-            placeholder="Enter Your Cnic"
+            placeholder="First Name"
             placeholderTextColor="#ffcc66"
             style={styles.textstyle}
-            value={cnic}
+            value={firstName}
+            onChangeText={(ok)=>setfirstName(ok)}
+            />
+     </View>
+    <View style={styles.inputtext}>
+            <TextInput
+            placeholder="Father Name"
+            placeholderTextColor="#ffcc66"
+            style={styles.textstyle}
+            value={fatherName}
+            onChangeText={(ok)=>setfatherName(ok)}
+            />
+     </View>
+     <View style={styles.inputtext}>
+            <TextInput
+            placeholder="Phone Number"
+            placeholderTextColor="#ffcc66"
+            style={styles.textstyle}
             keyboardType='numeric'
-            onChangeText={(main)=>setCnic(main)}
+            value={phoneNumber}
+            onChangeText={(ok)=>setphoneNumber(ok)}
             />
-        </View>
+     </View>
+   
+    <View style={styles.inputtext}>
+        <Text style={{color:'#ffcc66',marginTop:-2}}>DOB</Text>
+    <DatePicker
+          style={styles.datePickerStyle}
+          date={DOB} 
+           // Initial date from state
+          mode="date" // The enum of date, datetime and time
+          placeholder="Date of Birth"
+          format="DD-MM-YYYY"
+          minDate="01-01-1947"
+          maxDate="01-01-2022"
 
-        <View style={styles.headingview}>
-            <Text style={styles.heading}>
-            Property Details
-            </Text>
-        </View>
-      <View>
-      <View style={styles.inputtext}>
+          customStyles={{
+          
+            // dateInput: {
+            //   marginLeft: 36,
+            // }, 
+          }}
+          onDateChange={(date) => {
+            setDob(date);
+          }}
+        />
+     </View>
+     <Text style={{marginTop:22 ,color:'#ffcc66',
+      textAlign:'center',
+      fontSize:24,
+      fontWeight:'bold'}}>Property Detail</Text> 
+
+<View style={styles.inputtext}>
             <TextInput
-            placeholder="Property Address"
+            placeholder="Address"
             placeholderTextColor="#ffcc66"
             style={styles.textstyle}
-            
+            value={Address}
+            onChangeText={(ok)=>setAddress(ok)}
             />
-        </View>
-      <View style={styles.inputtext}>
+     </View>
+     </Col>
+        <Col>
+    <View style={styles.inputtext}>
             <TextInput
-            placeholder="City"
+            placeholder="Last Name"
             placeholderTextColor="#ffcc66"
             style={styles.textstyle}
-            
+            value={lastName}
+            onChangeText={(ok)=>setlastName(ok)}
             />
-        </View>
-
-    <Text style={{color:'#ffcc66'}}>Total Flats</Text>
-        <DropDownPicker
-      open={open}
-      value={value}
-      items={items}
-      setValue={setValue}
-      setItems={setItems}
-      setOpen={setOpen}
-      setValue={setValue}
-      setItems={setItems}
-      
+     </View>
+    <View style={styles.inputtext}>
+            <TextInput
+            placeholder="CNIC Number"
+            placeholderTextColor="#ffcc66"
+            style={styles.textstyle}
+            keyboardType='number-pad'
+            value={cnicNumber}
+            onChangeText={(ok)=>setcnicNumber(ok)}
+            />
+     </View>
+     <View style={styles.inputtext}>
+            <TextInput
+            placeholder="Email Address"
+            placeholderTextColor="#ffcc66"
+            style={styles.textstyle}
+            value={emailAddress}
+            onChangeText={(ok)=>setemailAddress(ok)}
+            />
+     </View>
+     <View style={{width:150,marginLeft:22,marginTop:120}}>
+     <Text style={{color:'#ffcc66'}}>Total Flats</Text>
+     <DropDownPicker
+     style={styles.dropPickerStyle}
+      open={Flatopen}
+      value={Flatvalue}
+      items={Flatitems}
+      setValue={setFlatValue}
+      setItems={setFlatItems}
+      setOpen={setFlatOpen}
+      setValue={setFlatValue}
+      setItems={setFlatItems}
+      onChangeText={(ok)=>setValue(ok)}
     />
-    <Text style={{color:'white'}}>{value}</Text></View>
-    <TouchableOpacity onPress={submitRecord} 
-        style={styles.button}
-        >
-            <Text style={styles.buttontxt}>
-               Submit Record
-            </Text>
-        </TouchableOpacity>
-</ScrollView>
+     </View>
+     </Col>
+     </Grid>
+<TouchableOpacity onPress={SubmitButton}>
+    <Text style={styles.Btn}>Submit</Text>
+</TouchableOpacity>
 
-        </View>
+     </ScrollView>
+</View>
     )
 }
 
-const styles =StyleSheet.create({
-    mainviewstyle:{
+const styles=StyleSheet.create({
+    MainView:{
         flex:1,
-        backgroundColor:"black"
+        backgroundColor:primaryColor
     },
-    inputtext:{
-            height:40,
-            borderBottomWidth:2,
-            marginHorizontal:20,
-            marginTop:20,
-            borderBottomColor:"#ffcc66"
+    Logo:{
+        width:190,
+        height:190
     },
     textstyle:{
-         marginLeft:10,
-         color:"#ffcc66"
+        marginLeft:10,
+        color:"#ffcc66",
 },
-button:{
-        alignItems:"center",
-        backgroundColor:"#ffcc66",
-        marginHorizontal:60,
-        marginVertical:10,
-        borderRadius:50,
-        marginTop:30,
-        height:40
-},
-headingview:{
-    alignItems:"center",
-    marginTop:vh*0.02
-},
-heading:{
-    color:"#ffcc66",
-    fontSize:20,
-    fontWeight:"bold"
-},
-buttontxt:{
-    color:"black",
-    fontSize:20,
-    justifyContent:"center",
-    textAlign:"center"
-},
-imagestyle:{
+inputtext:{
+    height:40,
+    borderBottomWidth:2,
+    marginHorizontal:20,
     marginTop:20,
-    marginLeft:40,
-    height:300,
-    width:300,
-    borderRadius:10
+    borderBottomColor:"#ffcc66",
+    width:192
 },
-
-container: {
-    flex: 1,
-    // padding: 10,
-    // justifyContent: 'center',
-    // alignItems: 'center',
+smallView:{
+    alignItems:'center'
+},
+datePickerStyle: {
+    width: 190,
+    height:39,
+    marginLeft:-2,
+    backgroundColor:'#ffcc66',
   },
-  title: {
-    textAlign: 'center',
-    fontSize: 20,
-    fontWeight: 'bold',
-    padding: 20,
-  },
-  datePickerStyle: {
-    width: 200,
-    // marginTop: 20,
+dropPickerStyle: {
+    width: 170,
+    marginTop:2,
+    height:46,
     marginLeft:0,
-  }
-
-});
-export default Register
+    backgroundColor:'#ffcc66'
+  },
+  Heading:{
+      color:'#ffcc66',
+      textAlign:'center',
+      fontSize:24,
+      fontWeight:'bold'
+    },
+    Btn:{
+        color:'white',
+        marginTop:-95,
+        paddingTop:12,
+        textAlign:'center',
+        fontSize:28,
+        fontWeight:'bold',
+        backgroundColor:'#ffcc66',
+        borderWidth:2,
+    borderRadius:22
+}
+})
+export default Register;

@@ -25,12 +25,12 @@
     "react-native-easy-grid": "^0.2.2",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-grid-component": "^2.0.1",
-    "react-native-image-picker": "^4.1.2",
+    "react-native-image-picker": "^4.7.3",
     "react-native-maps": "^0.29.3",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.9.0",
     "react-native-vector-icons": "^9.0.0",
-    "yarn": "^1.22.17"
+    "yarn": "^1.22.18"
   },
   "devDependencies": {
     "@babel/core": "7.17.0",

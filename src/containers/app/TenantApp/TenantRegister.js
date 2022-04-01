@@ -294,12 +294,10 @@ const TenantRegister = (props) => {
      </View>
      </Col>
      </Grid>
-<TouchableOpacity onPress={SubmitButton}>
+<TouchableOpacity onPress={()=>{SubmitButton();props.navigation.navigate('Agreement')}}>
     <Text style={styles.Btn}>Submit</Text>
 </TouchableOpacity>
-<TouchableOpacity onPress={()=>props.navigation.navigate('Agreement')}>
-    <Text style={styles.Btn}>View Agreement</Text>
-</TouchableOpacity>
+
      </ScrollView>
 </View>
     )

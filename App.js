@@ -2,7 +2,7 @@ import 'react-native-gesture-handler';
 import React, { useEffect, useState,ActivityIndicator} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import AppStack from "../OTS/src/navigation/tab/Tab";
-// import TenantStack from '../OTS/src/navigation/tab/TenantTab';
+import TenantStack from '../OTS/src/navigation/tab/TenantTab';
 import AuthStack from "../OTS/src/navigation/stack/AuthStack";
 import firebase from 'firebase';
 import Loader from './src/components/Loader';
@@ -30,7 +30,7 @@ useEffect(()=>{
     firebase.auth().onAuthStateChanged(user =>{
       if(user){
         setComponent(<AppStack/>)
-        // setComponent(<TenantStack/>)
+        // setComponent(<TenantStack />)
       }
       else{
         setComponent(<AuthStack/>)
