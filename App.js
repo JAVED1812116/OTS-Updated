@@ -6,9 +6,13 @@ import TenantStack from '../OTS/src/navigation/tab/TenantTab';
 import AuthStack from "../OTS/src/navigation/stack/AuthStack";
 import firebase from 'firebase';
 import Loader from './src/components/Loader';
+import SplashScreen from 'react-native-splash-screen'
 
 export default function App() {
-
+  
+  useEffect(()=>{
+    SplashScreen.hide()
+  },[])
   const [component, setComponent]= useState(< Loader />)
 
   useEffect(() =>{
@@ -38,6 +42,7 @@ useEffect(()=>{
     })
     },3000);
 },[])  
+
 
   return (
     <NavigationContainer>
