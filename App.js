@@ -33,15 +33,22 @@ useEffect(()=>{
     setTimeout(() =>{
     firebase.auth().onAuthStateChanged(user =>{
       if(user){
-        setComponent(<AppStack/>)
-        // setComponent(<TenantStack />)
-      }
-      else{
-        setComponent(<AuthStack/>)
-      }
-    })
-    },3000);
-},[])  
+        firebase.database().ref(`userss/${user.uid}`).on('value',snapshot=>{
+          console.log(snapshot,'sss');
+          if(snapshot.val().email=='landlord@landlord.com'){
+              setComponent(<AppStack/>)
+          }
+          else{
+              setComponent(<TenantStack/>)
+          }
+      })
+  }
+  else{
+      setComponent(<AuthStack/>)
+  }
+  })
+  },3000);
+},[])
 
 
   return (

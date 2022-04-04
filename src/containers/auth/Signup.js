@@ -19,6 +19,7 @@ const SignUp = (props) => {
             
             firebase.database().ref(`userss/${id}`)
             .set({
+                uuid:id,
                 name,
                 email,
                 isActive:"true"
@@ -82,7 +83,7 @@ const SignUp = (props) => {
   >
         <View style={styles.inputView}>
             <TextInput
-            placeholder="Set your home name"
+            placeholder="Name"
             placeholderTextColor="#ffcc66"
             style={styles.inputtxt}
             value={name}
