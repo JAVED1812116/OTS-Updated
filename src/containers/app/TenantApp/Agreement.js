@@ -31,7 +31,8 @@ const getLandlordRegistrationDetails=()=>{
     .on("value",snapshotttt =>{
     //  console.log(id,"IDDDDD");
         // console.log(snapshotttt.val(),"Valuee");
-        setPropertyRegistration(snapshotttt.val())
+        let data =snapshotttt.val()
+        setPropertyRegistration(data)
         // setPropertyRegistration(snapshotttt.val())
     })
 }

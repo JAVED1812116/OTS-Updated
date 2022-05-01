@@ -15,6 +15,7 @@ import In_Flat from '../../containers/app/LandlordApp/In_Flat';
 import UploadBill from '../../containers/app/LandlordApp/UploadBill';
 import PrevoiusBills from '../../containers/app/LandlordApp/PreviousBills';
 import Camera from '../../containers/app/LandlordApp/Camera';
+import RequestDetail from '../../containers/app/LandlordApp/RequestDetail';
 // import DateWiseBill from '../../containers/app/DateWiseBill';
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator()
@@ -70,11 +71,11 @@ const HomeStack=()=>{
         headerShown:false
       }}
       />
-       {/* <Stack.Screen name="DateWiseBill" component={DateWiseBill} 
+       <Stack.Screen name="RequestDetail" component={RequestDetail} 
       options={{
         headerShown:false
       }}
-      /> */}
+      />
     </Stack.Navigator>
   );
 }

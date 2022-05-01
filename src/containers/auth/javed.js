@@ -11,7 +11,7 @@ return(
     <Text style={styles.Btn1}>Landlord </Text>
 </TouchableOpacity>
 <TouchableOpacity onPress={()=>props.navigation.navigate('Login')}>
-    <Text style={styles.Btn1}>Tenant </Text>
+    <Text style={styles.Btn2}>Tenant </Text>
 </TouchableOpacity>
  </View>
 )
@@ -25,26 +25,24 @@ const styles=StyleSheet.create({
         backgroundColor:'#ffcc66',
         color:"white",
         width:200,
-        height:40,
+        height:60,
         borderRadius:8,
-        paddingTop:2,
+        paddingTop:6,
         fontWeight:'bold',
         textAlign:'center',
-        fontSize:25
+        fontSize:35
     },
     Btn2:{
-        color:'white',
-        marginTop:52,
-        width:200,
-        height:40,
-        fontSize:25,
-        borderRadius:8,
-        paddingTop:2,
-        fontWeight:'bold',
-        borderWidth:2,
-        borderColor:'#ffcc66',
         backgroundColor:'#ffcc66',
-        textAlign:'center'
+        color:"white",
+        width:200,
+        height:60,
+        borderRadius:8,
+        paddingTop:6,
+        fontWeight:'bold',
+        textAlign:'center',
+        fontSize:35,
+        marginTop:25
     },
     ImgLogo:{
         width:32,height:26,marginLeft:32

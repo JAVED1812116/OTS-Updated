@@ -2,16 +2,17 @@ import React,{useState,useEffect} from "react";
 import { View , Text , TouchableOpacity, ActivityIndicator, TextInput, StyleSheet,Image} from "react-native"
 import firebase from 'firebase';
 import {vw,vh} from "../../../constants"
-
-const NewRequest=()=>{
+import { Col, Row, Grid } from 'react-native-easy-grid';
+const NewRequest=({navigation})=>{
 
     useEffect(()=>{
         getUserDetails()
-
+        getNewReq()
     },[]);
 
     // Stetes
     const[userDetails,setuserDetails]=useState({})
+    const [array,setArray]=useState({})
 
     // User details fetching fnc
 const getUserDetails=()=>{
@@ -24,24 +25,61 @@ const getUserDetails=()=>{
     })
 }
 
-    
+const getNewReq=()=>{
+    firebase.database().ref("TenantRegistration")
+    .on("value",snapshot=>{
+        // console.log(snapshot.val());
+        setArray(snapshot.val())
+    })
+}
+console.log(array,"Data");
+
+const keys=array?Object.keys(array):[]
+    console.log(keys,"keys");
     // console.log("NAMEEE==>",name);
     return(
         <View style={styles.mainview}>
-
+<Grid>
 <View style={styles.textview}>
+    <Col>
         <Text style={styles.nametxt}>
             Hello</Text>
             <Text style={styles.nametxt}>
              {userDetails.name}</Text>
-
+    </Col>
+    <Col style={{marginLeft:82,marginTop:-189}}>
+<Image source={require('../../../../assets/Logo.jpg')} style={{width:190,height:190}}/>
+</Col>
     </View>
+</Grid>
 
 
-        <View style={styles.innerview}
-  >
+        <View style={styles.innerview}>
 
-
+            {
+              keys.length> 0 ?  keys.map(values=>{
+                //   console.log(values.firstName,"values");
+                return(
+                    <View style={{margin:35}}>
+                        <TouchableOpacity
+                        onPress={() => navigation.navigate("RequestDetail", {
+                            request: array[values],
+                            firebaseKey: values
+                        })}
+                        style={styles.buttonstyle}
+                        >
+                        <Text style={{color:"white",fontSize:24}}>
+                            {array[values].firstName}
+                        </Text>
+                        </TouchableOpacity>
+                    </View>
+                )
+                })
+                :
+                <View>
+                    <Text>Salman</Text>
+                </View>
+            }
 
 
             
@@ -58,8 +96,9 @@ const styles=StyleSheet.create({
         marginHorizontal:40,
         marginVertical:10,
         borderRadius:10,
-        marginTop:30,
-
+        marginTop:-200,
+        height:50,
+        paddingTop:10,
 },
 signuptxt:{
     color:"black",

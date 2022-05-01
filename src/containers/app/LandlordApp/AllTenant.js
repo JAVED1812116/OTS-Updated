@@ -1,9 +1,11 @@
 import React, {useEffect,useState} from 'react';
 import {View, Text,StyleSheet, TouchableOpacity,Image,ScrollView,Button} from "react-native";
 import firebase from 'firebase';
+import Tnaent1 from './Tanent1';
 
 const AllTenant=(props)=>{
     const [data, setData] = useState({});
+    const[tanent,setTanent]=useState({});
     useEffect(() =>{
         let id= firebase.auth().currentUser.uid;
         if (id) {
@@ -17,35 +19,46 @@ const AllTenant=(props)=>{
  
     },[]) 
     
-    // console.log(Object.keys(data).lastItem)
+    useEffect(()=>{
+        firebase.database().ref("TenantRegistration")
+        .on("value",(snapshot)=>{
+            console.log(snapshot.val(),"SSSSSSSSSSSSSSSSSSSSSS=>>>>>");
+            setTanent(snapshot.val())
+        })
+    })
 
-    // useEffect(()=>{
-       
+    const mykeys=tanent ? Object.keys(tanent):[]
 
-    // },[]);
+    // console.log(mykeys,"Keys=>>>.");
 
+    
     return(
         <View style={styles.View1}>
         
        
         <Image source={require('../../../../assets/Logo.jpg')} style={styles.logo}/>
         <Text style={styles.Heading}>My All Tenants</Text>
-
-<TouchableOpacity onPress={()=>props.navigation.navigate("In_Flat")}>
-    <Text style={styles.btn}>Flat 1 </Text>
-    <Text style={{color:'white'}}>{data[0]}</Text>
-</TouchableOpacity>
- 
- <TouchableOpacity onPress={()=>props.navigation.navigate("In_Flat")}>
-    <Text style={styles.btn}>Flat 2</Text>
-</TouchableOpacity>
-<TouchableOpacity onPress={()=>props.navigation.navigate("In_Flat")}>
-    <Text style={styles.btn}>Flat 3</Text>
-</TouchableOpacity> 
+       
+       
+        {mykeys.map(values => {
+            if (tanent[values].isAccepted==true) {
+                return(        
+            
+                    <TouchableOpacity onPress={()=>props.navigation.navigate("In_Flat")}>
+                    <Text style={styles.btn}>{tanent[values].advance} </Text>
+                </TouchableOpacity> 
+             
+    
+     )        
+            }
+        
+        }
+        )}
         
         </View>
     )
 }
+    
 const styles=StyleSheet.create({
    View1:{
        flex:1,

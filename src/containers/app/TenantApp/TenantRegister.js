@@ -71,7 +71,8 @@ const TenantRegister = (props) => {
               DOB,
               Roomvalue,
               Toiletvalue,
-              date
+              date,
+              uuid:id,
           })
           .then(resp=>{
               setfirstName("")
