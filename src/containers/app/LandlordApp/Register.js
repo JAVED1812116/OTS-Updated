@@ -223,8 +223,8 @@ const Register = (props) => {
       setValue={setFlatValue}
       setItems={setFlatItems}
       setOpen={setFlatOpen}
-      setValue={setFlatValue}
-      setItems={setFlatItems}
+      // setValue={setFlatValue}
+      // setItems={setFlatItems}
       onChangeText={(ok)=>setValue(ok)}
     />
      </View>

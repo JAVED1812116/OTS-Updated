@@ -34,7 +34,7 @@ const getUserDetails=()=>{
             Hello</Text>
             <Text style={styles.nametxt}>
              {userDetails.name}</Text>
-
+<Text style={{color:'white'}}>Tenant 1</Text>
     </View>
 
 

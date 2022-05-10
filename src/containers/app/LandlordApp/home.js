@@ -64,6 +64,7 @@ const getUserDetails=()=>{
                     All Tenant
                 </Text>
             </TouchableOpacity>
+            
             <TouchableOpacity style={styles.buttonstyle}
         onPress={()=>props.navigation.navigate("Account_Details")}            >
                 <Text style={styles.signuptxt}>

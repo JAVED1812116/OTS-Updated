@@ -5,6 +5,10 @@ import { primaryColor } from "../../../constants";
 const Agreement = (props) => {
     useEffect(()=>{
         getRegistrationDetails()
+        // getLandlordRegistrationDetails()
+    },[]);
+    useEffect(()=>{
+        // getRegistrationDetails()
         getLandlordRegistrationDetails()
     },[]);
 
@@ -25,15 +29,12 @@ const getRegistrationDetails=()=>{
     })
 }
 const getLandlordRegistrationDetails=()=>{
-    let id=firebase.auth().currentUser.uid
-    firebase.database().ref(`PropertyRegistration/${id}`)
-    // firebase.database().ref(`PropertyRegistration/${id}`)
+    firebase.database().ref(`PropertyRegistration`)
     .on("value",snapshotttt =>{
-    //  console.log(id,"IDDDDD");
-        // console.log(snapshotttt.val(),"Valuee");
-        let data =snapshotttt.val()
-        setPropertyRegistration(data)
-        // setPropertyRegistration(snapshotttt.val())
+        snapshotttt.forEach(innerproval =>{
+        console.log(innerproval,"Innner  Account");
+        setPropertyRegistration(innerproval.val())
+        })
     })
 }
     return (
@@ -42,15 +43,15 @@ const getLandlordRegistrationDetails=()=>{
                 <Image source={require('../../../../assets/Logo.jpg')} style={styles.logo} />
                 <Text style={{ color: "#ffcc66", fontSize: 24, fontWeight: 'bold' }}>RENT AGREEMENT</Text>
             </View>
-            <Text style={{color:'white',fontSize:22}}>{PropertyRegistration.father}</Text>
+            {/* <Text style={{color:'white',fontSize:22}}>{PropertyRegistration.father}</Text> */}
 <Text style={{color:'white'}}>This Rent Agreement is made on this 
-    <Text style={styles.pointed}> date </Text>
+    <Text style={styles.pointed}> {PropertyRegistration.date} </Text>
     (date of rent agreement)by 
     <Text style={styles.pointed}>  </Text>
     (name of the landlord) S/O
-    <Text style={styles.pointed}> father name </Text>
+    <Text style={styles.pointed}>{PropertyRegistration.fatherName} </Text>
     (father's name of the landlord),Address:
-    <Text style={styles.pointed}> Resident Address </Text>
+    <Text style={styles.pointed}> {PropertyRegistration.Address} </Text>
     (Residential Address of the landlord)
     </Text>
 

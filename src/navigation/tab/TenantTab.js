@@ -8,7 +8,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import TenantHome from '../../containers/app/TenantApp/TenantHome';
 import TenantRegister from '../../containers/app/TenantApp/TenantRegister';
 import Agreement from '../../containers/app/TenantApp/Agreement';
-
+import Bill from '../../containers/app/TenantApp/Previousbills';
 // import DateWiseBill from '../../containers/app/DateWiseBill';
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator();
@@ -39,6 +39,11 @@ const TenantStack=()=>{
         headerShown:false
       }}
       />
+      <Stack.Screen name="Bill" component={Bill} 
+      options={{
+        headerShown:false
+      }}
+      />
       
       
     </Stack.Navigator>
@@ -51,7 +56,9 @@ export default function App() {
       <Tab.Navigator>
 
         <Tab.Screen 
-        options={{tabBarIcon:()=> <Entypo size={30} name="user" color="black"/>}}
+        options={{tabBarIcon:()=> <Entypo size={30} 
+        name="user" color="black"/>}}
+        
          name="TenantRegister" component={TenantRegister} />
 
         {/* <Tab.Screen 

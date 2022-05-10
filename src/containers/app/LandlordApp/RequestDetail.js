@@ -129,6 +129,7 @@ const AcceptReq=()=>{
                 Decline
             </Text>
         </TouchableOpacity>
+        <Text style={{color:'white'}}>Request Detail</Text>
 </Col>        
 </Grid>
         </View>

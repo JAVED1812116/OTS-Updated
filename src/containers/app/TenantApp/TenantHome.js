@@ -8,9 +8,13 @@ const TenantHome=(props)=>{
         getUserDetails()
 
     },[]);
+    useEffect(()=>{
+        getAccountDetails()
 
+    },[]);
     // Stetes
     const[userDetails,setuserDetails]=useState({})
+    const[AccountDetail,setAccountDetails]=useState({})
 
     // User details fetching fnc
 const getUserDetails=()=>{
@@ -20,6 +24,16 @@ const getUserDetails=()=>{
     //  console.log(id,"IDDDDD");
         // console.log(snapshotttt.val(),"Valuee");
         setuserDetails(snapshotttt.val())
+    })
+}
+console.log(AccountDetail);
+const getAccountDetails=()=>{
+    firebase.database().ref(`AccountDetail`)
+    .on("value",snapshotttt =>{
+        snapshotttt.forEach(innerproval =>{
+        console.log(innerproval,"Innner  Account");
+        setAccountDetails(innerproval.val())
+        })
     })
 }
     return(
@@ -50,20 +64,27 @@ const getUserDetails=()=>{
 
     <Grid style={{marginTop:150}}>
     <Col style={{width:120,height:120,margin:6}}>
-<TouchableOpacity>
+<TouchableOpacity onPress={()=>props.navigation.navigate("Agreement")}>
     <Image source={require('../../../../assets/uploadbills.png')} style={{width:120,height:120}}/>
     <Text style={{color:'white'}}>Current Bill</Text>
 </TouchableOpacity>
     </Col>
     <Col style={{width:120,height:120,margin:6}}>
-<TouchableOpacity onPress={()=>props.navigation.navigate("NewRequest")}>
+<TouchableOpacity onPress={()=>props.navigation.navigate("Bill")}>
     <Image source={require('../../../../assets/PreviousBills.png')} style={{width:120,height:120}}/>
     <Text style={{color:'white'}}>Previous Bill</Text>
 </TouchableOpacity>
     </Col>
     </Grid>
-
         </View>
+<View style={{marginTop:162,alignItems:'center'}}>
+        <Text style={{color:'#ffcc66',fontSize:22,fontWeight:'bold'}}>Pay Online</Text>
+        </View>
+        <View>
+        <Text style={{color:'#ffcc66',fontSize:16}}>Bank Name: <Text style={{color:'white'}}>{AccountDetail.BankName}</Text></Text>
+        <Text style={{color:'#ffcc66',fontSize:16}}>IBAN Number:<Text style={{color:'white'}}>{AccountDetail.IBAN}</Text></Text>
+        <Text style={{color:'#ffcc66',fontSize:16}}>Card Number:<Text style={{color:'white'}}>{AccountDetail.Cardnumber}</Text></Text>
+</View>
 </View>
     )
 }

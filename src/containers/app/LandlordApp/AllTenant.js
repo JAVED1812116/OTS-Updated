@@ -2,32 +2,34 @@ import React, {useEffect,useState} from 'react';
 import {View, Text,StyleSheet, TouchableOpacity,Image,ScrollView,Button} from "react-native";
 import firebase from 'firebase';
 import Tnaent1 from './Tanent1';
+import In_Flat from '../../../containers/app/LandlordApp/In_Flat';
 
 const AllTenant=(props)=>{
-    const [data, setData] = useState({});
-    const[tanent,setTanent]=useState({});
-    useEffect(() =>{
-        let id= firebase.auth().currentUser.uid;
-        if (id) {
-            firebase.database().ref(`PropertyRegistration/${id}`)
-                .on('value', (snapshot) => {
-                    if (snapshot.val()){
-                     setData(snapshot.val());
+    const[tanent,setTanent]=useState([]);
+    // useEffect(() =>{
+    //     let id= firebase.auth().currentUser.uid;
+    //     if (id) {
+    //         firebase.database().ref(`PropertyRegistration/${id}`)
+    //             .on('value', (snapshot) => {
+    //                 if (snapshot.val()){
+    //                  setData(snapshot.val());
                     
-                    }
-                });}
- 
-    },[]) 
+    //                 }
+    //             });}
+
+    // },[]) 
     
     useEffect(()=>{
         firebase.database().ref("TenantRegistration")
-        .on("value",(snapshot)=>{
-            console.log(snapshot.val(),"SSSSSSSSSSSSSSSSSSSSSS=>>>>>");
-            setTanent(snapshot.val())
+        .once("value",(snapshot)=>{
+            // console.log(snapshot.val(),"SSSSSSSSSSSSSSSSSSSSSS=>>>>>");
+            let mydata=snapshot.val()?snapshot.val():{}
+            setTanent(mydata)
         })
-    })
+    },[])
 
     const mykeys=tanent ? Object.keys(tanent):[]
+    console.log(mykeys,"KEEEEEEESSS");
 
     // console.log(mykeys,"Keys=>>>.");
 
@@ -43,9 +45,13 @@ const AllTenant=(props)=>{
         {mykeys.map(values => {
             if (tanent[values].isAccepted==true) {
                 return(        
-            
-                    <TouchableOpacity onPress={()=>props.navigation.navigate("In_Flat")}>
-                    <Text style={styles.btn}>{tanent[values].advance} </Text>
+                    
+                    <TouchableOpacity onPress={()=>props.navigation.navigate("In_Flat",{
+                        activeKey:values,
+                        data:tanent[values]    
+                    }
+                    )}>
+                    <Text style={styles.btn}>{tanent[values].firstName} </Text>
                 </TouchableOpacity> 
              
     

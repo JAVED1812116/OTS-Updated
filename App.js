@@ -11,7 +11,9 @@ import SplashScreen from 'react-native-splash-screen'
 export default function App() {
   
   useEffect(()=>{
-    SplashScreen.hide()
+    setTimeout(()=>{
+      SplashScreen.hide()
+    },5000)
   },[])
   const [component, setComponent]= useState(< Loader />)
 

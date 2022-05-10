@@ -4,11 +4,16 @@ import firebase from 'firebase';
 import {vw,vh} from "../../../constants";
 import { Col, Row, Grid } from 'react-native-easy-grid';
 
-const In_Flat=(props)=>{
+const In_Flat=({route,navigation})=>{
     useEffect(()=>{
         getUserDetails()
 
     },[]);
+
+    console.log(route.params,"PARAAAAAAMMMM");
+    const user =route.params
+    const id=user.data.uuid
+    console.log(id,"IDDDDDDDDDDDDDDD");
 
     // Stetes
     const[userDetails,setuserDetails]=useState({})
@@ -42,7 +47,7 @@ const getUserDetails=()=>{
 </TouchableOpacity>
     </Col>
     <Col style={{width:120,height:120,margin:6}}>
-<TouchableOpacity onPress={()=>props.navigation.navigate("Camera")}>
+<TouchableOpacity onPress={()=>navigation.navigate("Camera")}>
     <Image source={require('../../../../assets/FlatPic.jpeg')} style={{width:120,height:120}}/>
     <Text style={{color:'white'}}>Flat Pics</Text>
 </TouchableOpacity>
@@ -51,13 +56,15 @@ const getUserDetails=()=>{
 
     <Grid style={{marginTop:150}}>
     <Col style={{width:120,height:120,margin:6}}>
-<TouchableOpacity onPress={()=>props.navigation.navigate("UploadBill")}>
+<TouchableOpacity onPress={()=>navigation.navigate("UploadBill",{
+    activeUser:id
+})}>
     <Image source={require('../../../../assets/uploadbills.png')} style={{width:120,height:120}}/>
     <Text style={{color:'white'}}>Upload Bills</Text>
 </TouchableOpacity>
     </Col>
     <Col style={{width:120,height:120,margin:6}}>
-<TouchableOpacity onPress={()=>props.navigation.navigate("PreviousBills")}>
+<TouchableOpacity onPress={()=>navigation.navigate("PreviousBills")}>
     <Image source={require('../../../../assets/PreviousBills.png')} style={{width:120,height:120}}/>
     <Text style={{color:'white'}}>Previous Bills</Text>
 </TouchableOpacity>
@@ -89,4 +96,4 @@ const styles=StyleSheet.create({
 },
 });
 
-export default In_Flat
+export default In_Flat;

@@ -47,7 +47,7 @@ const keys=array?Object.keys(array):[]
             <Text style={styles.nametxt}>
              {userDetails.name}</Text>
     </Col>
-    <Col style={{marginLeft:82,marginTop:-189}}>
+    <Col style={{marginLeft:82,marginTop:-70}}>
 <Image source={require('../../../../assets/Logo.jpg')} style={{width:190,height:190}}/>
 </Col>
     </View>
@@ -61,6 +61,7 @@ const keys=array?Object.keys(array):[]
                 //   console.log(values.firstName,"values");
                 return(
                     <View style={{margin:35}}>
+                        <Text style={{color:"white"}}>New Request</Text>
                         <TouchableOpacity
                         onPress={() => navigation.navigate("RequestDetail", {
                             request: array[values],
@@ -77,7 +78,7 @@ const keys=array?Object.keys(array):[]
                 })
                 :
                 <View>
-                    <Text>Salman</Text>
+                    <Text>JAVED</Text>
                 </View>
             }
 
@@ -106,7 +107,7 @@ signuptxt:{
 },
 nametxt:{
     color:"#ffcc66",
-    fontSize:25
+    fontSize:25,
 },
 imagess:{
     alignItems:"center",
@@ -122,13 +123,15 @@ mainview:{
     backgroundColor:"black",
 },
 innerview:{
-    justifyContent:"center",
+    // justifyContent:"center",
     flex:1,
-    marginBottom:vh*0.15
+    // marginBottom:vh*0.15,
+    marginTop:205
 },
 textview:{
     marginStart:vw*0.10,
-    marginTop:vh*0.05
+    marginTop:vh*0.05,
+    width:252
 },
 
 inputtxt:{
