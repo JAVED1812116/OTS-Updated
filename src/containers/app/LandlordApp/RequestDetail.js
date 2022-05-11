@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from"react";
 import {View,Text,TouchableOpacity,StyleSheet,Image} from "react-native"
 import firebase from "firebase";
-import {vw,vh} from "../../../constants"
+import {vw,vh, primaryColor} from "../../../constants"
 import { Col, Row, Grid } from 'react-native-easy-grid';
 
 const RequestDetail=({route})=>{
@@ -142,7 +142,7 @@ const AcceptReq=()=>{
 const styles=StyleSheet.create({
     mainview:{
         flex:1,
-        backgroundColor:"black",
+        backgroundColor:primaryColor,
     },
     nametxt:{
         color:"#ffcc66",

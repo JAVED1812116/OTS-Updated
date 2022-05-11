@@ -3,6 +3,7 @@ import {View, Text,StyleSheet, TouchableOpacity,Image,ScrollView,Button} from "r
 import firebase from 'firebase';
 import Tnaent1 from './Tanent1';
 import In_Flat from '../../../containers/app/LandlordApp/In_Flat';
+import { primaryColor } from '../../../constants';
 
 const AllTenant=(props)=>{
     const[tanent,setTanent]=useState([]);
@@ -68,7 +69,7 @@ const AllTenant=(props)=>{
 const styles=StyleSheet.create({
    View1:{
        flex:1,
-       backgroundColor:'black',
+       backgroundColor:primaryColor,
        alignItems:'center'
    },
    logo:{

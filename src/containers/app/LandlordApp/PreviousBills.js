@@ -9,7 +9,7 @@ import {
         } from "react-native";
 import firebase from "firebase";
 import { Col, Row, Grid } from 'react-native-easy-grid';
-import { globaltextcolor, vh, vw } from "../../../constants";
+import { globaltextcolor, primaryColor, vh, vw } from "../../../constants";
 
 
 const PrevoiusBills=(props)=>{
@@ -51,7 +51,7 @@ const PrevoiusBills=(props)=>{
         },[])
     console.log(array,"ALLLARAR");
     return(
-    <View style={{ flex: 1, backgroundColor: 'black', alignItems: 'center' }}>
+    <View style={{ flex: 1, backgroundColor: primaryColor, alignItems: 'center' }}>
         {/* <Image source={require('../../../assets/Logo.jpg')} style={styles.logo}/> */}
         <Text style={{color:'#ffcc66',fontSize:24,fontWeight:'bold'}}>PrevoiusBills</Text>
         {array.map(valuess =>{

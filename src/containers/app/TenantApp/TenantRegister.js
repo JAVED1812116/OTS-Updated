@@ -150,7 +150,7 @@ const TenantRegister = (props) => {
             placeholder="Phone Number"
             placeholderTextColor="#ffcc66"
             style={styles.textstyle}
-            keyboardType='name-phone-pad'
+            keyboardType='number-pad'
             value={phoneNumber}
             onChangeText={(ok)=>setphoneNumber(ok)}
             />
@@ -160,7 +160,7 @@ const TenantRegister = (props) => {
             placeholder="Advance"
             placeholderTextColor="#ffcc66"
             style={styles.textstyle}
-            keyboardType='name-phone-pad'
+            keyboardType='number-pad'
             value={advance}
             onChangeText={(ok)=>setadvance(ok)}
             />
@@ -230,7 +230,7 @@ const TenantRegister = (props) => {
             placeholder="CNIC Number"
             placeholderTextColor="#ffcc66"
             style={styles.textstyle}
-            keyboardType='name-phone-pad'
+            keyboardType='numeric'
             value={cnicNumber}
             onChangeText={(ok)=>setcnicNumber(ok)}
             />
@@ -249,7 +249,7 @@ const TenantRegister = (props) => {
             placeholder="Monthly Rent"
             placeholderTextColor="#ffcc66"
             style={styles.textstyle}
-            keyboardType='name-phone-pad'
+            keyboardType='numeric'
             value={monthlyRent}
             onChangeText={(ok)=>setmonthlyRent(ok)}
             />

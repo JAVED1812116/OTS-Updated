@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from "react";
 import { View , Text , TouchableOpacity, ActivityIndicator, TextInput, StyleSheet,Image} from "react-native"
 import firebase from 'firebase';
-import {vw,vh} from "../../../constants";
+import {vw,vh, primaryColor} from "../../../constants";
 import { Col, Row, Grid } from 'react-native-easy-grid';
 
 const In_Flat=({route,navigation})=>{
@@ -79,7 +79,7 @@ const getUserDetails=()=>{
 const styles=StyleSheet.create({
    MainView:{
         flex:1,
-        backgroundColor:'black',
+        backgroundColor:primaryColor,
     
    },
    Heading:{

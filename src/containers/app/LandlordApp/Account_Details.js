@@ -3,6 +3,7 @@ import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity } from 'reac
 import { useState } from 'react/cjs/react.development';
 import firebase from 'firebase';
 import { ScrollView } from 'react-native-gesture-handler';
+import { primaryColor } from '../../../constants';
 
 
 const Account_Details = () => {
@@ -31,7 +32,7 @@ const Account_Details = () => {
             })
     }
     return (
-        <View style={{ flex: 1, backgroundColor: 'black', alignItems: 'center' }}>
+        <View style={{ flex: 1, backgroundColor: 'black', alignItems: 'center',backgroundColor:primaryColor }}>
             <Image source={require('../../../../assets/Logo.jpg')} style={styles.logo} />
             <ScrollView>
                 <Image source={require('../../../../assets/Card.jpg')} style={styles.logo} />

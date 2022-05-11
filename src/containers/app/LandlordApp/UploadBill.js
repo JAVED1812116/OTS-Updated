@@ -4,6 +4,7 @@ import { Col, Row, Grid } from 'react-native-easy-grid';
 import DatePicker from 'react-native-datepicker';
 
 import firebase from 'firebase';
+import { primaryColor } from '../../../constants';
 
 const UploadBill = (props) => {
   let id = firebase.auth().currentUser.uid
@@ -253,7 +254,7 @@ const UploadBill = (props) => {
 const styles = StyleSheet.create({
   View1: {
     flex: 1,
-    backgroundColor: 'black',
+    backgroundColor: primaryColor,
     alignItems: 'center'
   },
   logo: {

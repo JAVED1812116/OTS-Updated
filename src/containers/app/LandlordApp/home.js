@@ -2,7 +2,7 @@ import React,{useState,useEffect} from "react";
 import { View , Text , TouchableOpacity, ActivityIndicator, TextInput, StyleSheet,Image} from "react-native"
 import firebase from 'firebase';
 import { Col, Row, Grid } from 'react-native-easy-grid';
-import {vw,vh} from "../../../constants";
+import {vw,vh, primaryColor} from "../../../constants";
 
 
 const Home=(props)=>{
@@ -108,7 +108,7 @@ imgstyle:{
 
 mainview:{
     flex:1,
-    backgroundColor:"black",
+    backgroundColor:primaryColor,
 },
 innerview:{
     justifyContent:"center",
