@@ -59,7 +59,7 @@ const AcceptReq=()=>{
             <Text style={styles.nametxt}>
              {userDetails.name}</Text>
     </Col>
-    <Col style={{marginLeft:82, marginStart:vw*0.22,marginTop:vh*-1.001}}>
+    <Col style={{marginLeft:122, marginStart:vw*0.22,marginTop:vh*-1.001}}>
 <Image source={require('../../../../assets/Logo.jpg')} style={{width:190,height:190}}/>
 </Col>
     </View>

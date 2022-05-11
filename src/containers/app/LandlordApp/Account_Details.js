@@ -4,11 +4,15 @@ import { useState , useEffect} from 'react/cjs/react.development';
 import firebase from 'firebase';
 import { ScrollView } from 'react-native-gesture-handler';
 import { primaryColor } from '../../../constants';
-
-
+import { Col, Row, Grid } from 'react-native-easy-grid';
+import {vw,vh} from "../../../constants";
 const Account_Details = () => {
     useEffect(()=>{
         getAccountDetails()
+
+    },[]);
+    useEffect(()=>{
+        getUserDetails()
 
     },[]);
     let id = firebase.auth().currentUser.uid
@@ -18,6 +22,7 @@ const Account_Details = () => {
     const [BankName, setBankName] = useState("")
     const [Cardnumber, setCardNumber] = useState("")
     const[AccountDetail,setAccountDetails]=useState({})
+    const[userDetails,setuserDetails]=useState({})
     const submitRecord = () => {
         firebase.database().ref(`AccountDetail/${id}`)
             .set({
@@ -46,9 +51,29 @@ const Account_Details = () => {
             })
         })
     }
+
+    const getUserDetails=()=>{
+        let id=firebase.auth().currentUser.uid
+        firebase.database().ref(`userss/${id}`)
+        .on("value",snapshotttt =>{
+        //  console.log(id,"IDDDDD");
+            // console.log(snapshotttt.val(),"Valuee");
+            setuserDetails(snapshotttt.val())
+        })
+    }
     return (
         <View style={styles.MainView}>
+            <Grid>
+                <Col style={{marginLeft:25,marginTop:15}}>
+            <Text style={styles.nametxt}>
+            Hello</Text>
+            <Text style={styles.nametxt}>
+             {userDetails.name}</Text>
+             </Col>
+             <Col style={{marginLeft:-80,marginTop:-10}}>
             <Image source={require('../../../../assets/Logo.jpg')} style={styles.logo} />
+            </Col>
+            </Grid>
             <ScrollView>
                 <Image source={require('../../../../assets/Card.jpg')} style={styles.logo} />
                 <Text style={styles.Heading}>Change Account Information</Text>
@@ -102,6 +127,7 @@ const styles = StyleSheet.create({
     },
     btn: {
         marginTop: 22,
+        marginLeft:32,
         color: 'white',
         fontSize: 27,
         width: 215,
@@ -122,6 +148,14 @@ const styles = StyleSheet.create({
           fontSize: 24, 
           fontWeight: 'bold' 
         },
-
+        nametxt:{
+            color:"#ffcc66",
+            fontSize:25
+        },
+        textview:{
+            marginStart:vw*0.10,
+            marginTop:vh*0.05,
+            width:182
+        },
 })
 export default Account_Details
