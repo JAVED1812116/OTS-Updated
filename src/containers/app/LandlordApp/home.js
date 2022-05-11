@@ -38,7 +38,7 @@ const getUserDetails=()=>{
             <Text style={styles.nametxt}>
              {userDetails.name}</Text>
     </Col>
-    <Col style={{marginLeft:82,marginTop:-189}}>
+    <Col style={{marginLeft:125,marginTop:-250}}>
 <Image source={require('../../../../assets/Logo.jpg')} style={{width:190,height:190}}/>
 </Col>
     </View>
@@ -99,7 +99,7 @@ nametxt:{
 },
 imagess:{
     alignItems:"center",
-    marginTop:vh*0.08,
+    marginTop:vh*0.05,
 },
 imgstyle:{
     height:vh*0.25,
@@ -113,11 +113,12 @@ mainview:{
 innerview:{
     justifyContent:"center",
     flex:1,
-    marginBottom:vh*0.15
+    marginBottom:vh*0.11
 },
 textview:{
     marginStart:vw*0.10,
-    marginTop:vh*0.05
+    marginTop:vh*0.05,
+    width:182
 },
 
 inputtxt:{

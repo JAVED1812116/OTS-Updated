@@ -40,13 +40,13 @@ const getUserDetails=()=>{
 {/* <Text style={styles.Heading}>javed samejo</Text> */}
 
     <Grid style={{marginTop:25}}>
-    <Col style={{width:120,height:120,margin:6}}>
-<TouchableOpacity>
+    <Col style={styles.Button}>
+<TouchableOpacity onPress={()=>navigation.navigate("agreement")}>
     <Image source={require('../../../../assets/agreement.jpg')} style={{width:120,height:120}}/>
     <Text style={{color:'white'}}>Agreement</Text>
 </TouchableOpacity>
     </Col>
-    <Col style={{width:120,height:120,margin:6}}>
+    <Col style={styles.Button}>
 <TouchableOpacity onPress={()=>navigation.navigate("Camera")}>
     <Image source={require('../../../../assets/FlatPic.jpeg')} style={{width:120,height:120}}/>
     <Text style={{color:'white'}}>Flat Pics</Text>
@@ -55,7 +55,7 @@ const getUserDetails=()=>{
     </Grid>
 
     <Grid style={{marginTop:150}}>
-    <Col style={{width:120,height:120,margin:6}}>
+    <Col style={styles.Button}>
 <TouchableOpacity onPress={()=>navigation.navigate("UploadBill",{
     activeUser:id
 })}>
@@ -63,7 +63,7 @@ const getUserDetails=()=>{
     <Text style={{color:'white'}}>Upload Bills</Text>
 </TouchableOpacity>
     </Col>
-    <Col style={{width:120,height:120,margin:6}}>
+    <Col style={styles.Button}>
 <TouchableOpacity onPress={()=>navigation.navigate("PreviousBills")}>
     <Image source={require('../../../../assets/PreviousBills.png')} style={{width:120,height:120}}/>
     <Text style={{color:'white'}}>Previous Bills</Text>
@@ -94,6 +94,11 @@ const styles=StyleSheet.create({
     color:"#ffcc66",
     fontSize:25
 },
+Button:{
+    width:120,
+    height:120,
+    margin:6
+}
 });
 
 export default In_Flat;

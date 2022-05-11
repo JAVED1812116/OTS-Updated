@@ -32,11 +32,11 @@ const Account_Details = () => {
             })
     }
     return (
-        <View style={{ flex: 1, backgroundColor: 'black', alignItems: 'center',backgroundColor:primaryColor }}>
+        <View style={styles.MainView}>
             <Image source={require('../../../../assets/Logo.jpg')} style={styles.logo} />
             <ScrollView>
                 <Image source={require('../../../../assets/Card.jpg')} style={styles.logo} />
-                <Text style={{ color: '#ffcc66', fontSize: 24, fontWeight: 'bold' }}>Account Detail</Text>
+                <Text style={styles.Heading}>Account Detail</Text>
                 <TextInput
                     placeholder='Enter your IBAN Number'
                     placeholderTextColor={'white'}
@@ -88,6 +88,19 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         textAlign: 'center',
         backgroundColor: '#ffcc66'
-    }
+    },
+    MainView:
+    { flex: 1, 
+        backgroundColor: 'black',
+         alignItems: 'center',
+         backgroundColor:primaryColor
+         },
+         Heading:
+         {
+          color: '#ffcc66',
+          fontSize: 24, 
+          fontWeight: 'bold' 
+        },
+
 })
 export default Account_Details
