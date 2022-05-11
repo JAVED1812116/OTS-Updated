@@ -21,28 +21,26 @@ const PrevoiusBills=(props)=>{
     const [valuess,setvaluess]=useState([])
     // const[array,setArray]=useState([])
     const getPreviousbills=()=>{
-        // let tempArray=[]
+        let tempArray=[]
         firebase.database().ref(`UploadBill`)
         .on("value",snapshotttt =>{
             snapshotttt.forEach(innerproval =>{
-                // tempArray.push(innerproval.val())
                 innerproval.forEach(value =>{
-                    console.log(value,"Bilsss");
-                    setvaluess(value.val())
-                    // setArray(tempArray)
+                    tempArray.push(value.val())
                     })
-            // console.log(innerproval,"Billsss");
-            // setPreviousbils(innerproval.val())
+                    setvaluess(tempArray)
+ 
             })
             
         })
     }
+    let currentUser=firebase.auth().currentUser.uid
+    console.log(currentUser,"MY IDDDDDDDDDD");
+    // console.log(valuess,"BIll Data=============>");
     return(
     <View style={{ flex: 1, backgroundColor: 'black', alignItems: 'center' }}>
-        {/* <Image source={require('../../../assets/Logo.jpg')} style={styles.logo}/> */}
-        {/* <Text style={{color:'#ffcc66',fontSize:24,fontWeight:'bold'}}>PrevoiusBills</Text>
-        <Text style={{color:'#ffcc66',fontSize:24,fontWeight:'bold'}}>{value.MonthlyRent}</Text> */}
-        {/* {valuess.map(value =>{
+        {valuess.map(value =>{
+            if(value.tenantId==currentUser){
             return(
             <ScrollView>
         <View>
@@ -73,7 +71,8 @@ const PrevoiusBills=(props)=>{
 <Text style={{color:'#ffcc66',fontSize:24,textAlign:'center'}}>Total Bill:{value.gtotal}</Text>
          </View>
          </ScrollView>
-            )})}  */}
+            )}
+            })} 
         {/*
         {/*  */}
         {/* <Text style={{color:"black"}}>Total:{array.total}</Text> */}
@@ -110,4 +109,4 @@ const styles=StyleSheet.create({
     }
 })
 
-export default PrevoiusBills
+export default PrevoiusBills;

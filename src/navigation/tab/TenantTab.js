@@ -9,6 +9,7 @@ import TenantHome from '../../containers/app/TenantApp/TenantHome';
 import TenantRegister from '../../containers/app/TenantApp/TenantRegister';
 import Agreement from '../../containers/app/TenantApp/Agreement';
 import Bill from '../../containers/app/TenantApp/Previousbills';
+import OnlinePayment from '../../containers/app/TenantApp/Online_Payment';
 // import DateWiseBill from '../../containers/app/DateWiseBill';
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator();
@@ -40,6 +41,11 @@ const TenantStack=()=>{
       }}
       />
       <Stack.Screen name="Bill" component={Bill} 
+      options={{
+        headerShown:false
+      }}
+      />
+      <Stack.Screen name="OnlinePayment" component={OnlinePayment} 
       options={{
         headerShown:false
       }}

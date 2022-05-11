@@ -51,7 +51,7 @@ const PrevoiusBills=({route})=>{
                 setArray(tempArray)
             })
         },[])
-    console.log(array,"ALLLARAR");
+    // console.log(array,"ALLLARAR");
     return(
     <View style={{ flex: 1, backgroundColor: primaryColor, alignItems: 'center' }}>
         {/* <Image source={require('../../../assets/Logo.jpg')} style={styles.logo}/> */}
