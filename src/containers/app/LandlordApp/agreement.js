@@ -48,7 +48,7 @@ const getLandlordRegistrationDetails=()=>{
     <Text style={styles.pointed}> {PropertyRegistration.date} </Text>
     (date of rent agreement)by 
     <Text style={styles.pointed}>  </Text>
-    (name of the landlord) S/O
+    (name of the landlord) <Text style={styles.pointed}>{PropertyRegistration.firstName} </Text> S/O
     <Text style={styles.pointed}>{PropertyRegistration.fatherName} </Text>
     (father's name of the landlord),Address:
     <Text style={styles.pointed}> {PropertyRegistration.Address} </Text>
