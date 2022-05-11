@@ -6,7 +6,12 @@ import DatePicker from 'react-native-datepicker';
 import firebase from 'firebase';
 import { primaryColor } from '../../../constants';
 
-const UploadBill = (props) => {
+const UploadBill = ({route}) => {
+const user=route.params
+const tenantId=user.activeUser
+// console.log(tenantId,"tenant");
+
+
   let id = firebase.auth().currentUser.uid
   
   const [date, setDate] = useState('01-01-2022');
@@ -41,7 +46,8 @@ const UploadBill = (props) => {
         number1,
         number2,
         number3,
-        number4
+        number4,
+        tenantId
     })
     .then(response =>{
         // console.log(response,"RESSSSSSSSSS");

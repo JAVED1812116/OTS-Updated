@@ -13,7 +13,7 @@ const In_Flat=({route,navigation})=>{
     console.log(route.params,"PARAAAAAAMMMM");
     const user =route.params
     const id=user.data.uuid
-    console.log(id,"IDDDDDDDDDDDDDDD");
+    // console.log(id,"IDDDDDDDDDDDDDDD");
 
     // Stetes
     const[userDetails,setuserDetails]=useState({})
@@ -64,7 +64,9 @@ const getUserDetails=()=>{
 </TouchableOpacity>
     </Col>
     <Col style={styles.Button}>
-<TouchableOpacity onPress={()=>navigation.navigate("PreviousBills")}>
+<TouchableOpacity onPress={()=>navigation.navigate("PreviousBills",{
+    activeUser:id
+})}>
     <Image source={require('../../../../assets/PreviousBills.png')} style={{width:120,height:120}}/>
     <Text style={{color:'white'}}>Previous Bills</Text>
 </TouchableOpacity>
