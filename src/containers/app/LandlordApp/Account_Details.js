@@ -1,18 +1,23 @@
 import React, * as react from 'react';
 import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
-import { useState } from 'react/cjs/react.development';
+import { useState , useEffect} from 'react/cjs/react.development';
 import firebase from 'firebase';
 import { ScrollView } from 'react-native-gesture-handler';
 import { primaryColor } from '../../../constants';
 
 
 const Account_Details = () => {
+    useEffect(()=>{
+        getAccountDetails()
+
+    },[]);
     let id = firebase.auth().currentUser.uid
 
     // states 
     const [IBAN, setIBANNum] = useState("")
     const [BankName, setBankName] = useState("")
     const [Cardnumber, setCardNumber] = useState("")
+    const[AccountDetail,setAccountDetails]=useState({})
     const submitRecord = () => {
         firebase.database().ref(`AccountDetail/${id}`)
             .set({
@@ -25,18 +30,28 @@ const Account_Details = () => {
                 setIBANNum("")
                 setBankName("")
                 setCardNumber("")
-                alert('saved')
+                alert('Changed')
             })
             .catch(eror => {
                 console.log(eror, "EERRREERRR");
             })
+    }
+
+    const getAccountDetails=()=>{
+        firebase.database().ref(`AccountDetail`)
+        .on("value",snapshotttt =>{
+            snapshotttt.forEach(innerproval =>{
+            console.log(innerproval,"Innner  Account");
+            setAccountDetails(innerproval.val())
+            })
+        })
     }
     return (
         <View style={styles.MainView}>
             <Image source={require('../../../../assets/Logo.jpg')} style={styles.logo} />
             <ScrollView>
                 <Image source={require('../../../../assets/Card.jpg')} style={styles.logo} />
-                <Text style={styles.Heading}>Account Detail</Text>
+                <Text style={styles.Heading}>Change Account Information</Text>
                 <TextInput
                     placeholder='Enter your IBAN Number'
                     placeholderTextColor={'white'}
@@ -63,6 +78,12 @@ const Account_Details = () => {
                 <TouchableOpacity onPress={submitRecord} >
                     <Text style={styles.btn}>Save</Text>
                 </TouchableOpacity>
+        <View style={{marginTop:10}}>
+        <Text style={[styles.Heading,{textAlign:'center'}]}>Current Account</Text>
+        <Text style={{color:'#ffcc66',fontSize:16}}>Bank Name: <Text style={{color:'white'}}>{AccountDetail.BankName}</Text></Text>
+        <Text style={{color:'#ffcc66',fontSize:16}}>IBAN Number:<Text style={{color:'white'}}>{AccountDetail.IBAN}</Text></Text>
+        <Text style={{color:'#ffcc66',fontSize:16}}>Card Number:<Text style={{color:'white'}}>{AccountDetail.Cardnumber}</Text></Text>
+</View>
             </ScrollView>
         </View>
     )
