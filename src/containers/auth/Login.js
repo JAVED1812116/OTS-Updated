@@ -44,7 +44,9 @@ const Login = (props) => {
                 >
                 <Text style={{
                     color:"black",
-                    fontSize:25
+                    fontSize:25,
+                    textAlign:'center',
+                    marginTop:4
                 }}>
                     Login
                 </Text>
@@ -142,6 +144,7 @@ const styles=StyleSheet.create({
         marginVertical:10,
         borderRadius:10,
         marginTop:30,
+        height:45
 
 },
 imagess:{

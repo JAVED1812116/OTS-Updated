@@ -22,26 +22,26 @@ const styles=StyleSheet.create({
         marginTop:112
     },
     Btn1:{
-        backgroundColor:'#ffcc66',
-        color:"white",
+        backgroundColor:'#daa520',
+        color:"black",
         width:200,
-        height:60,
+        height:55,
         borderRadius:8,
         paddingTop:6,
         fontWeight:'bold',
         textAlign:'center',
-        fontSize:35
+        fontSize:30
     },
     Btn2:{
-        backgroundColor:'#ffcc66',
-        color:"white",
+        backgroundColor:'#daa520',
+        color:"black",
         width:200,
-        height:60,
+        height:55,
         borderRadius:8,
         paddingTop:6,
         fontWeight:'bold',
         textAlign:'center',
-        fontSize:35,
+        fontSize:30,
         marginTop:25
     },
     ImgLogo:{

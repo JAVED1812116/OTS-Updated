@@ -41,7 +41,9 @@ const getUserDetails=()=>{
 
     <Grid style={{marginTop:25}}>
     <Col style={styles.Button}>
-<TouchableOpacity onPress={()=>navigation.navigate("agreement")}>
+<TouchableOpacity onPress={()=>navigation.navigate("agreement",{
+     activeUser:id
+})}>
     <Image source={require('../../../../assets/agreement.jpg')} style={{width:120,height:120}}/>
     <Text style={{color:'white'}}>Agreement</Text>
 </TouchableOpacity>
