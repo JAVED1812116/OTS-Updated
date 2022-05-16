@@ -37,10 +37,10 @@ useEffect(()=>{
       if(user){
         firebase.database().ref(`userss/${user.uid}`).on('value',snapshot=>{
           console.log(snapshot,'sss');
-          if(snapshot.val()?.email=='abutalhavlogs@gmail.com'){
+          if(snapshot.val()?.type=="Landlord"){
               setComponent(<AppStack/>)
           }
-          else{
+          else if (snapshot.val()?.type=="Tenant"){
               setComponent(<TenantStack/>)
           }
       })

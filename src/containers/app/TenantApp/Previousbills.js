@@ -48,23 +48,23 @@ const PrevoiusBills=(props)=>{
          </View>
          <View>
 <Grid>
-    <Col style={{width:172}}>
+    {/* <Col style={{width:172}}>
     <Text></Text>
         <Text style={styles.BillHeading}>MonthlyRent<Text style={styles.BillTxt}>{valuess.MonthlyRent}</Text></Text>
         <Text style={styles.BillHeading}>Maintainence Charges<Text style={styles.BillTxt}>{value.Maintainence}</Text></Text>
         <Text></Text>
         <Text style={styles.BillHeading}>Security      Charges:<Text style={styles.BillTxt}>{value.MonthlyRent}</Text></Text>
         <Text style={styles.BillHeading}>Trash          Charges:<Text style={styles.BillTxt}>{value.MonthlyRent}</Text></Text>
-    </Col>
+    </Col> */}
     <Col style={{width:172,marginTop:8}}>
         <Text style={{color:'#ffcc66',textAlign:'center'}}>K-Electric</Text>
-        <Text style={styles.BillHeading}>Current Reading:<Text style={styles.BillTxt}>{value.number1}</Text></Text>
-        <Text style={styles.BillHeading}>Previous  Reading:<Text style={styles.BillTxt}>{value.number2}</Text></Text>
+        <Text style={styles.BillHeading}>Current Reading:<Text style={styles.BillTxt}>{value.CurrentReadingk}</Text></Text>
+        <Text style={styles.BillHeading}>Previous  Reading:<Text style={styles.BillTxt}>{value.PreviousReadingk}</Text></Text>
         <Text style={styles.BillHeading}>Per Unit:<Text style={styles.BillTxt}>{value.Unit}</Text></Text>
         
         <Text style={{color:'#ffcc66',textAlign:'center'}}>SSGC</Text>
-        <Text style={styles.BillHeading}>Current Reading:<Text style={styles.BillTxt}>{value.number3}</Text></Text>
-        <Text style={styles.BillHeading}>Previous   Reading:<Text style={styles.BillTxt}>{value.number4}</Text></Text>
+        <Text style={styles.BillHeading}>Current Reading:<Text style={styles.BillTxt}>{value.CurrentReadings}</Text></Text>
+        <Text style={styles.BillHeading}>Previous   Reading:<Text style={styles.BillTxt}>{value.PreviousReadingS}</Text></Text>
         <Text style={styles.BillHeading}>Per Unit:<Text style={styles.BillTxt}>{value.SSGUnit}</Text></Text>
     </Col>            
 </Grid>

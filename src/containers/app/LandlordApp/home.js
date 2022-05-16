@@ -50,14 +50,20 @@ const getUserDetails=()=>{
             </View>
 
         <View style={styles.innerview}>
-
-            <TouchableOpacity style={[styles.buttonstyle,{marginTop:82}]}
+        <TouchableOpacity style={[styles.buttonstyle,{marginTop:92}]}
+            onPress={()=>props.navigation.navigate("NewTenant")}>
+                <Text style={styles.signuptxt}>
+                    Add New Tenant
+                </Text>
+            </TouchableOpacity>
+            
+            <TouchableOpacity style={styles.buttonstyle}
             onPress={()=>props.navigation.navigate("NewRequest")}>
                 <Text style={styles.signuptxt}>
                     New Request
                 </Text>
             </TouchableOpacity>
-
+            
             <TouchableOpacity style={styles.buttonstyle}
         onPress={()=>props.navigation.navigate("AllTenant")}            >
                 <Text style={styles.signuptxt}>
@@ -65,6 +71,12 @@ const getUserDetails=()=>{
                 </Text>
             </TouchableOpacity>
             
+            <TouchableOpacity style={styles.buttonstyle}
+        onPress={()=>props.navigation.navigate("RentSetting")}            >
+                <Text style={styles.signuptxt}>
+                    Rent Setting
+                </Text>
+            </TouchableOpacity>
             <TouchableOpacity style={styles.buttonstyle}
         onPress={()=>props.navigation.navigate("Account_Details")}            >
                 <Text style={styles.signuptxt}>
@@ -86,7 +98,7 @@ const styles=StyleSheet.create({
         marginHorizontal:40,
         marginVertical:10,
         borderRadius:10,
-        marginTop:30,
+        // marginTop:20,
 
 },
 signuptxt:{

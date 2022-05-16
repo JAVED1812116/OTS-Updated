@@ -7,10 +7,10 @@ return(
     <View style={{flex:1,backgroundColor:'black',alignItems:'center'}}>
     <Image source={require('../../../assets/Logo.jpg')} style={styles.logo} />
      
-<TouchableOpacity onPress={()=>props.navigation.navigate('Login')}>
+<TouchableOpacity onPress={()=>props.navigation.navigate('Login', { type: "Landlord" })}>
     <Text style={styles.Btn1}>Landlord </Text>
 </TouchableOpacity>
-<TouchableOpacity onPress={()=>props.navigation.navigate('Login')}>
+<TouchableOpacity onPress={()=>props.navigation.navigate('Login', { type: "Tenant" })}>
     <Text style={styles.Btn2}>Tenant </Text>
 </TouchableOpacity>
  </View>

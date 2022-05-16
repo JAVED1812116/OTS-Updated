@@ -17,6 +17,8 @@ import PrevoiusBills from '../../containers/app/LandlordApp/PreviousBills';
 import Camera from '../../containers/app/LandlordApp/Camera';
 import RequestDetail from '../../containers/app/LandlordApp/RequestDetail';
 import agreement from '../../containers/app/LandlordApp/agreement';
+import RentSetting from '../../containers/app/LandlordApp/RentSetting';
+import NewTenant from '../../containers/app/LandlordApp/NewTenant';
 // import DateWiseBill from '../../containers/app/DateWiseBill';
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator()
@@ -52,6 +54,11 @@ const HomeStack=()=>{
         headerShown:false
       }}
       />
+            <Stack.Screen name="RentSetting" component={RentSetting} 
+      options={{
+        headerShown:false
+      }}
+      />
             <Stack.Screen name="In_Flat" component={In_Flat} 
       options={{
         headerShown:false
@@ -82,6 +89,11 @@ const HomeStack=()=>{
         headerShown:false
       }}
       />
+       <Stack.Screen name="NewTenant" component={NewTenant} 
+      options={{
+        headerShown:false
+      }}
+      />
     </Stack.Navigator>
   );
 }
@@ -89,13 +101,13 @@ const HomeStack=()=>{
 export default function App() {
   return (
       <Tab.Navigator>
-      <Tab.Screen 
+      {/* <Tab.Screen 
         options={{tabBarIcon:()=> 
           <Ionicons
             size={30}
              name="add-circle"
              color="black"/>}}
-        name="Register" component={Register}/>
+        name="Register" component={Register}/> */}
 
         <Tab.Screen 
         options={{tabBarIcon:()=> <Entypo size={30} name="home" color="black"/>}}

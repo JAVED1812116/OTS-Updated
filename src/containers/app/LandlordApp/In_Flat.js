@@ -3,6 +3,7 @@ import { View , Text , TouchableOpacity, ActivityIndicator, TextInput, StyleShee
 import firebase from 'firebase';
 import {vw,vh, primaryColor} from "../../../constants";
 import { Col, Row, Grid } from 'react-native-easy-grid';
+import { ScrollView } from "react-native-gesture-handler";
 
 const In_Flat=({route,navigation})=>{
     useEffect(()=>{
@@ -38,8 +39,7 @@ const getUserDetails=()=>{
         <View style={{alignItems:'center'}}>
              <Image source={require('../../../../assets/Logo.jpg')} style={styles.logo}/>
 {/* <Text style={styles.Heading}>javed samejo</Text> */}
-
-    <Grid style={{marginTop:25}}>
+    <Grid>
     <Col style={styles.Button}>
 <TouchableOpacity onPress={()=>navigation.navigate("agreement",{
      activeUser:id
@@ -74,7 +74,13 @@ const getUserDetails=()=>{
 </TouchableOpacity>
     </Col>
     </Grid>
-
+        </View>
+        <View style={{marginTop:190,marginLeft:110}}>
+        <TouchableOpacity onPress={()=>navigation.navigate("PreviousBills",{
+    activeUser:id
+})}>
+    <Text style={styles.UnRegister}>Un-Register</Text>
+</TouchableOpacity>
         </View>
 </View>
     )
@@ -85,6 +91,18 @@ const styles=StyleSheet.create({
         flex:1,
         backgroundColor:primaryColor,
     
+   },
+   UnRegister:{
+    color:'black',
+    textAlign:'center',
+    paddingTop:10,
+    backgroundColor:'#ffcc66',
+    fontSize:22,
+    fontWeight:'bold',
+    width:192,
+    height:52,
+    borderWidth:2,
+    borderRadius:2
    },
    Heading:{
         color:'#ffcc66'

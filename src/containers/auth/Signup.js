@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import { View , Text , TouchableOpacity, ActivityIndicator, TextInput, StyleSheet,Image} from "react-native"
 import firebase from 'firebase';
 import {vw,vh} from "../../constants"
@@ -8,21 +8,33 @@ const SignUp = (props) => {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [RefferenceCode, setRefferenceCode] = useState("")
     const [loading, setLoading] = useState(false)
+    const [users,setUsers]=useState({})
 
+    const type=props.route.params.type
+    console.log(type,"type");
+
+        useEffect(()=>{
+        allUsers()
+    },[])
+    let refferenceCode=Math.floor(Math.random()*1000000) +1;
+    // console.log(refferenceCode,"LOGGGGG");
     const signUpUser = () =>{
         setLoading(true)
         firebase.auth().createUserWithEmailAndPassword(email, password)
         
         .then(response =>{
-            let id=firebase.auth().currentUser.uid
+            let id=firebase.auth()?.currentUser.uid
             
             firebase.database().ref(`userss/${id}`)
             .set({
                 uuid:id,
                 name,
                 email,
-                isActive:"true"
+                isActive:"true",
+                type,
+                refferenceCode
             })
             .then(responsee =>{
                 firebase.auth().signOut()
@@ -49,7 +61,63 @@ const SignUp = (props) => {
         })
     }
 
-    
+
+
+    const signTanent = () =>{
+        setLoading(true)
+        firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then(response =>{
+            let id=firebase.auth()?.currentUser.uid
+            
+            firebase.database().ref(`userss/${id}`)
+            .set({
+                uuid:id,
+                name,
+                email,
+                isActive:"true",
+                type,
+                RefferenceCode
+            })
+            .then(responsee =>{
+                firebase.auth().signOut()
+                setLoading(false)
+                setName("")
+                setEmail("")
+                setPassword("");
+               
+                
+            // console.log(response,"RESPONSEEEE");
+         
+            })
+            // setLoading(false)
+            // // console.log(response,"RESPONSEEEE");
+            // setName("")
+            // setEmail("")
+            // setPassword("")
+            // props.navigation.navigate("Login");
+        })
+        .catch(errr =>{
+            setLoading(false)
+            alert(errr.message)
+            console.log(errr,"ERRRRRRRR");
+        })
+    }
+
+
+    const allUsers=()=>{
+        firebase.database().ref("userss")
+        .on("value",snapshot=>{
+            // console.log(snapshot.val(),"snapshot====>");
+            let data=snapshot.val()?snapshot.val():{}
+            setUsers(data)
+        })
+    }
+
+const keys=Object.keys(users)
+// console.log(keys,"keys");
+// let mykeys=keys.map(value=>{users[resfrence])
+
+
     const renderButton = () =>{
         if (loading == true){
             return(
@@ -71,7 +139,31 @@ const SignUp = (props) => {
             )
         }
     }
+
+
+    const renderTanentButton = () =>{
+        if (loading == true){
+            return(
+                <ActivityIndicator
+                size="large"
+                color="white"
+                />
+            )
+        }
+        else{
+            return(
+                <TouchableOpacity style={styles.buttonstyle}
+            onPress={signTanent}
+            >
+                <Text style={styles.signuptxt}>
+                    Sign Up
+                </Text>
+            </TouchableOpacity>
+            )
+        }
+    }
     // console.log("NAMEEE==>",name);
+   if(type=="Landlord"){
     return(
         <View style={styles.mainview}>
 <View style={styles.imagess}>
@@ -79,8 +171,7 @@ const SignUp = (props) => {
             />
             </View>
 
-        <View style={styles.innerview}
-  >
+        <View style={styles.innerview}>
         <View style={styles.inputView}>
             <TextInput
             placeholder="Name"
@@ -112,6 +203,7 @@ const SignUp = (props) => {
             onChangeText={(main)=>setPassword(main)}
             />
         </View>
+        
 
         <TouchableOpacity 
         onPress={()=>props.navigation.navigate("Login")}
@@ -127,6 +219,72 @@ const SignUp = (props) => {
 
         </View>
     )
+   }
+   else{
+    return(
+        <View style={styles.mainview}>
+<View style={styles.imagess}>
+            <Image source={require('../../../assets/Logo.jpg')} style={styles.imgstyle}
+            />
+            </View>
+
+        <View style={styles.innerview}>
+        <View style={styles.inputView}>
+            <TextInput
+            placeholder="Name"
+            placeholderTextColor="#ffcc66"
+            style={styles.inputtxt}
+            value={name}
+            onChangeText={(main)=>setName(main)}
+
+            />
+        </View>
+
+        <View style={styles.inputView}>
+            <TextInput
+            placeholder="Email Address"
+            placeholderTextColor="#ffcc66"
+            style={styles.inputtxt}
+            value={email}
+            onChangeText={(main)=>setEmail(main)}
+            />
+        </View>
+
+        <View style={styles.inputView}>
+            <TextInput
+            placeholder="Password"
+            placeholderTextColor="#ffcc66"
+            style={styles.inputtxt}
+            secureTextEntry
+            value={password}
+            onChangeText={(main)=>setPassword(main)}
+            />
+        </View>
+        <View style={styles.inputView}>
+            <TextInput
+            placeholder="Refference Code"
+            placeholderTextColor="#ffcc66"
+            style={styles.inputtxt}
+            value={RefferenceCode}
+            onChangeText={(main)=>setRefferenceCode(main)}
+            />
+        </View>
+
+        <TouchableOpacity 
+        onPress={()=>props.navigation.navigate("Login")}
+        >
+            <Text style={{textAlign:"center", marginTop:10, color:"#ffcc66"}}>
+             Already Have Account? Login
+            </Text>
+        </TouchableOpacity>
+
+            {renderTanentButton()}
+            
+        </View>
+
+        </View>
+    )
+   }
 }
 
 const styles=StyleSheet.create({

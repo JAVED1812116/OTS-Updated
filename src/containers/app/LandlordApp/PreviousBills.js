@@ -65,26 +65,28 @@ const PrevoiusBills=({route})=>{
                  </View>
                  <View>
         <Grid>
-            <Col style={{width:172}}>
+            {/* <Col style={{width:172}}>
             <Text></Text>
                 <Text style={styles.BillHeading}>MonthlyRent<Text style={styles.BillTxt}>{valuess.MonthlyRent}</Text></Text>
                 <Text style={styles.BillHeading}>Maintainence Charges<Text style={styles.BillTxt}>{valuess.Maintainence}</Text></Text>
                 <Text></Text>
                 <Text style={styles.BillHeading}>Security      Charges:<Text style={styles.BillTxt}>{valuess.MonthlyRent}</Text></Text>
                 <Text style={styles.BillHeading}>Trash          Charges:<Text style={styles.BillTxt}>{valuess.MonthlyRent}</Text></Text>
-            </Col>
-            <Col style={{width:172,marginTop:8}}>
+            </Col> */}
+            <Col style={{width:172,marginTop:8,borderRightWidth:2,borderRightColor:'#ffcc66'}}>
                 <Text style={{color:'#ffcc66',textAlign:'center'}}>K-Electric</Text>
-                <Text style={styles.BillHeading}>Current Reading:<Text style={styles.BillTxt}>{valuess.number1}</Text></Text>
-                <Text style={styles.BillHeading}>Previous  Reading:<Text style={styles.BillTxt}>{valuess.number2}</Text></Text>
+                <Text style={styles.BillHeading}>Current Reading:<Text style={styles.BillTxt}>{valuess.CurrentReadingk}</Text></Text>
+                <Text style={styles.BillHeading}>Previous  Reading:<Text style={styles.BillTxt}>{valuess.PreviousReadingk}</Text></Text>
                 <Text style={styles.BillHeading}>Per Unit:<Text style={styles.BillTxt}>{valuess.Unit}</Text></Text>
-                
+                </Col>
+                <Col style={{width:172,marginTop:8}}>
                 <Text style={{color:'#ffcc66',textAlign:'center'}}>SSGC</Text>
-                <Text style={styles.BillHeading}>Current Reading:<Text style={styles.BillTxt}>{valuess.number3}</Text></Text>
-                <Text style={styles.BillHeading}>Previous   Reading:<Text style={styles.BillTxt}>{valuess.number4}</Text></Text>
+                <Text style={styles.BillHeading}>Current Reading:<Text style={styles.BillTxt}>{valuess.CurrentReadings}</Text></Text>
+                <Text style={styles.BillHeading}>Previous   Reading:<Text style={styles.BillTxt}>{valuess.PreviousReadings}</Text></Text>
                 <Text style={styles.BillHeading}>Per Unit:<Text style={styles.BillTxt}>{valuess.SSGUnit}</Text></Text>
             </Col>            
         </Grid>
+        <Text style={styles.BillHeading}>MonthlyRent:<Text style={styles.BillTxt}>{valuess.Monthlyrent}</Text></Text>
         <Text style={{color:'#ffcc66',fontSize:24,textAlign:'center'}}>Total Bill:{valuess.gtotal}</Text>
                  </View>
                  </ScrollView>

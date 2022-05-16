@@ -7,29 +7,34 @@ import firebase from 'firebase';
 import { primaryColor } from '../../../constants';
 
 const UploadBill = ({route}) => {
+  useEffect(()=>{
+    getRentSetting()
+
+},[]);
 const user=route.params
 const tenantId=user.activeUser
 // console.log(tenantId,"tenant");
 
 
+
   let id = firebase.auth().currentUser.uid
-  
+  const[RentSetting,setRentSetting]=useState({})
   const [date, setDate] = useState('01-01-2022');
-  const [number1, setNumber1] = useState(0);
-  const [number2, setNumber2] = useState(0);
+  const [CurrentReadingk, setCurrentReadingk] = useState(0);
+  const [PreviousReadingk, setPreviousReadingk] = useState(0);
   const [total, setTotal] = useState(null);
-  const [number3, setNumber3] = useState(0);
-  const [number4, setNumber4] = useState(0);
+  const [CurrentReadings, setCurrentReadings] = useState(0);
+  const [PreviousReadings, setPreviousReadings] = useState(0);
   const [gtotal, setgTotal] = useState(0);
   const [Unit, setUnit] = useState(0);
   const [SSGUnit, setSSGUnit] = useState(0);
   const [SSGC, setSSGTotal] = useState(null);
 
-  const [MonthlyRent, setMonthlyRent] = useState(0);
-  const [Maintainence, setMaintainence] = useState(0);
-  const [Security, setSecurity] = useState(0);
-  const [Trash, setTrash] = useState(null);
-
+  // const [MonthlyRent, setMonthlyRent] = useState(0);
+  // const [Maintainence, setMaintainence] = useState(0);
+  // const [Security, setSecurity] = useState(0);
+  // const [Trash, setTrash] = useState(null);
+  console.log(RentSetting.MonthlyRent)
   const submitRecord = () => {
     firebase.database().ref(`UploadBill/${id}`)
     .push({
@@ -39,14 +44,11 @@ const tenantId=user.activeUser
         Unit,
         SSGUnit,
         SSGC,
-        MonthlyRent,
-        Maintainence,
-        Security,
-        Trash,
-        number1,
-        number2,
-        number3,
-        number4,
+        CurrentReadingk,
+        PreviousReadingk,
+        CurrentReadings,
+        PreviousReadings,
+        Monthlyrent,
         tenantId
     })
     .then(response =>{
@@ -57,14 +59,14 @@ const tenantId=user.activeUser
         setUnit("")
         setSSGUnit("")
         setSSGTotal("")
-        setMonthlyRent("")
-        setMaintainence("")
-        setSecurity("")
-        setTrash("")
-        setNumber1("")
-        setNumber2("")
-        setNumber3("")
-        setNumber4("")
+        // setMonthlyRent("")
+        // setMaintainence("")
+        // setSecurity("")
+        // setTrash("")
+        setCurrentReadingk("")
+        setPreviousReadingk("")
+        setCurrentReadings("")
+        setPreviousReadings("")
         alert('saved')
     })
     .catch(eror =>{
@@ -73,17 +75,27 @@ const tenantId=user.activeUser
 }
  
   function subTogether() {
-    let newTotal = number1 - number2;
+    let newTotal = CurrentReadingk - PreviousReadingk;
       setTotal(newTotal);
      
       // Alert.alert('Alert', 'Total: ' + newTotal); // total has the old value in the render
         
     }
   function SSGCsub() {
-    let SSGCTotal = number3 - number4;
+    let SSGCTotal = CurrentReadings - PreviousReadings;
       setSSGTotal(SSGCTotal);
     }
-
+    const getRentSetting=()=>{
+      firebase.database().ref(`RentSetting`)
+      .on("value",snapshotttt =>{
+          snapshotttt.forEach(innerproval =>{
+          // console.log(innerproval,"Innner  Account");
+          setRentSetting(innerproval.val())
+          console.log(innerproval);
+          })
+      })
+  }
+  
   return (
     <View style={styles.View1}>
       <Image source={require('../../../../assets/Logo.jpg')} style={styles.logo} />
@@ -127,9 +139,9 @@ const tenantId=user.activeUser
               placeholderTextColor={'white'}
               keyboardType='numeric'
               style={styles.txtInput}
-              value={number1}
+              value={CurrentReadingk}
               onChangeText={v => {
-                setNumber1(Number.parseInt(v)); // Use parsed value from onChangeText
+                setCurrentReadingk(Number.parseInt(v)); // Use parsed value from onChangeText
             }}
             />
             <TextInput 
@@ -137,16 +149,16 @@ const tenantId=user.activeUser
             placeholderTextColor={'white'} 
             keyboardType='numeric' 
             style={styles.txtInput} 
-            value={number2}
+            value={PreviousReadingk}
             onChange={e => {
-              setNumber2(Number.parseInt(e.nativeEvent.text)); // or get correct value from nativeEvent onChange
+              setPreviousReadingk(Number.parseInt(e.nativeEvent.text)); // or get correct value from nativeEvent onChange
           }}
             />
             <TouchableOpacity onPress={subTogether}>
               <Text style={styles.Btn}>Calculate</Text>
             </TouchableOpacity>
             <TextInput 
-            placeholder='Unit' 
+            placeholder='Per Unit' 
             placeholderTextColor={'white'} 
             keyboardType='numeric' 
             style={styles.txtInput} 
@@ -156,8 +168,8 @@ const tenantId=user.activeUser
             }}
             />
             
-           <Text style={{color:'white'}}>Total Unit:<Text style={styles.txtStyle}> {total}</Text></Text>
-           <Text style={{color:'white'}}>K-Electric Bill:<Text style={styles.txtStyle}> {total*Unit}</Text></Text>
+           <Text style={{color:'white',marginLeft:20}}>Total Unit:<Text style={styles.txtStyle}> {total}</Text></Text>
+           <Text style={{color:'white',marginLeft:20}}>K-Electric Bill:<Text style={styles.txtStyle}> {total*Unit}</Text></Text>
           </Col>
           <Col style={styles.colStyle}>
             <Text style={[styles.subHeading, { marginLeft: 52 }]}>SSGC</Text>
@@ -166,9 +178,9 @@ const tenantId=user.activeUser
             placeholderTextColor={'white'} 
             keyboardType='numeric' 
             style={styles.txtInput} 
-            value={ number3 }
+            value={ CurrentReadings }
               onChangeText={v => {
-                setNumber3(Number.parseInt(v)); // Use parsed value from onChangeText
+                setCurrentReadings(Number.parseInt(v)); // Use parsed value from onChangeText
             }}
             />
             <TextInput 
@@ -176,16 +188,16 @@ const tenantId=user.activeUser
             placeholderTextColor={'white'} 
             keyboardType='numeric' 
             style={styles.txtInput} 
-            value={ number4 }
+            value={ PreviousReadings }
             onChange={e => {
-              setNumber4(Number.parseInt(e.nativeEvent.text)); // or get correct value from nativeEvent onChange
+              setPreviousReadings(Number.parseInt(e.nativeEvent.text)); // or get correct value from nativeEvent onChange
           }}
             />
             <TouchableOpacity onPress={SSGCsub}>
               <Text style={styles.Btn}>Calculate</Text>
             </TouchableOpacity>
             <TextInput 
-            placeholder='Unit' 
+            placeholder='Per Unit' 
             placeholderTextColor={'white'} 
             keyboardType='numeric' 
             style={styles.txtInput} 
@@ -194,12 +206,12 @@ const tenantId=user.activeUser
                 setSSGUnit(Number.parseInt(ss)); // Use parsed value from onChangeText
             }}
             />
-            <Text style={{color:'white'}}>Total Unit:<Text style={styles.txtStyle}> {SSGC}</Text></Text>
-            <Text style={{color:'white'}}>K-Electric Bill:<Text style={styles.txtStyle}>{SSGC*SSGUnit}</Text></Text>
+            <Text style={{color:'white',marginLeft:15}}>Total Unit:<Text style={styles.txtStyle}> {SSGC}</Text></Text>
+            <Text style={{color:'white',marginLeft:15}}>SSGC Bill:<Text style={styles.txtStyle}>{SSGC*SSGUnit}</Text></Text>
           </Col>
         </Grid>
-        <Text style={[styles.subHeading, { marginLeft: 17 }]}>Monthly Dues</Text>
-        <Grid>
+        {/* <Text style={[styles.subHeading, { marginLeft: 17 }]}>Monthly Dues</Text> */}
+        {/* <Grid>
           <Col style={{ height: 150, width: 180 }}>
             <TextInput 
             placeholder='Monthly Rent' 
@@ -244,9 +256,9 @@ const tenantId=user.activeUser
             style={styles.txtInput} 
             />
           </Col>
-        </Grid>
+        </Grid> */}
         <Text style={{color:'#ffcc66',textAlign:'center',fontSize:24}}>{gtotal}</Text>
-        <TouchableOpacity onPress={() =>{setgTotal(SSGC*SSGUnit+total*Unit+Maintainence+Security+Trash+MonthlyRent)}}>
+        <TouchableOpacity onPress={() =>{setgTotal(SSGC*SSGUnit+total*Unit)}}>
           <Text style={styles.btn}>Total Bill</Text>
         </TouchableOpacity>
         

@@ -9,6 +9,12 @@ const Login = (props) => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [loading, setLoading] = useState(false)
+    
+    // console.log(props.route.params,"LOGGGGG====>>");
+    const selection=props.route.params
+    const type=selection.type
+    // console.log(type,"type");
+
 
     const loginUser = () => {
         setLoading(true)
@@ -112,7 +118,9 @@ console.log("PROPSS>>",props);
         </View>
 
         <TouchableOpacity 
-        onPress={()=>props.navigation.navigate("SignUp")}
+        onPress={()=>props.navigation.navigate("SignUp",{
+            type,
+        })}
         >
             <Text style={{textAlign:"center", marginTop:10, color:"#ffcc66"}}>
                 Dont Have Account? SignUp
