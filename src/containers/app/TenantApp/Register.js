@@ -1,6 +1,6 @@
 import React, * as react from 'react';
 import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
-import { useState } from 'react/cjs/react.development';
+import { useState,useEffect } from 'react/cjs/react.development';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import DatePicker from 'react-native-datepicker';
@@ -8,7 +8,42 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import firebase from 'firebase';
 import { primaryColor } from '../../../constants';
 
-const TenantRegister = (props) => {
+const Register = (props) => {
+  useEffect(()=>{
+    getRentSetting()
+
+},[]);
+
+useEffect(()=>{
+  getUserDetails()
+},[])
+
+  const getRentSetting=()=>{
+    firebase.database().ref(`RentSetting`)
+    .on("value",snapshotttt =>{
+        snapshotttt.forEach(innerproval =>{
+        console.log(innerproval,"Innner  RentSetting");
+        setRentSetting(innerproval.val())
+        })
+    })
+}
+ // Stetes
+ const[userDetails,setuserDetails]=useState({})
+
+ // User details fetching fnc
+const getUserDetails=()=>{
+ let id=firebase.auth().currentUser.uid
+ firebase.database().ref(`userss/${id}`)
+ .on("value",snapshotttt =>{
+ //  console.log(id,"IDDDDD");
+     // console.log(snapshotttt.val(),"Valuee");
+     setuserDetails(snapshotttt.val())
+ })
+}
+
+console.log(userDetails.RefferenceCode,"user===>>>");
+
+
     let id = firebase.auth().currentUser.uid
 
     const [firstName,setfirstName]=useState('');
@@ -21,6 +56,7 @@ const TenantRegister = (props) => {
     const [emailAddress,setemailAddress]=useState('');
     const [monthlyRent,setmonthlyRent]=useState('');
     const [previousAddress,setpreviousAddress]=useState('');
+    const [RentSetting,setRentSetting]=useState('');
 //Family Members
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState('');
@@ -73,6 +109,7 @@ const TenantRegister = (props) => {
               Toiletvalue,
               date,
               uuid:id,
+              MyRefferenceCode:userDetails.RefferenceCode,
           })
           .then(resp=>{
               setfirstName("")
@@ -135,6 +172,7 @@ const TenantRegister = (props) => {
             value={firstName}
             onChangeText={(ok)=>setfirstName(ok)}
             />
+            
      </View>
     <View style={styles.inputtext}>
             <TextInput
@@ -153,16 +191,6 @@ const TenantRegister = (props) => {
             keyboardType='number-pad'
             value={phoneNumber}
             onChangeText={(ok)=>setphoneNumber(ok)}
-            />
-     </View>
-     <View style={styles.inputtext}>
-            <TextInput
-            placeholder="Advance"
-            placeholderTextColor="#ffcc66"
-            style={styles.textstyle}
-            keyboardType='number-pad'
-            value={advance}
-            onChangeText={(ok)=>setadvance(ok)}
             />
      </View>
      <View style={styles.inputtext}>
@@ -208,8 +236,8 @@ const TenantRegister = (props) => {
       setValue={setToiletValue}
       setItems={setToiletItems}
       setOpen={setToiletOpen}
-      setValue={setToiletValue}
-      setItems={setToiletItems}
+      // setValue={setToiletValue}
+      // setItems={setToiletItems}
       onChangeText={(ok)=>setValue(ok)}
     />
      </View>
@@ -244,16 +272,7 @@ const TenantRegister = (props) => {
             onChangeText={(ok)=>setemailAddress(ok)}
             />
      </View>
-     <View style={styles.inputtext}>
-            <TextInput
-            placeholder="Monthly Rent"
-            placeholderTextColor="#ffcc66"
-            style={styles.textstyle}
-            keyboardType='numeric'
-            value={monthlyRent}
-            onChangeText={(ok)=>setmonthlyRent(ok)}
-            />
-     </View>
+  
      <View style={styles.inputtext}>
             <TextInput
             placeholder="Previous Address"
@@ -273,8 +292,8 @@ const TenantRegister = (props) => {
       setValue={setRoomValue}
       setItems={setRoomItems}
       setOpen={setRoomOpen}
-      setValue={setRoomValue}
-      setItems={setRoomItems}
+      // setValue={setRoomValue}
+      // setItems={setRoomItems}
       onChangeText={(ok)=>setValue(ok)}
     />
      </View>
@@ -288,8 +307,8 @@ const TenantRegister = (props) => {
       setValue={setValue}
       setItems={setItems}
       setOpen={setOpen}
-      setValue={setValue}
-      setItems={setItems}
+      // setValue={setValue}
+      // setItems={setItems}
       onChangeText={(ok)=>setValue(ok)}
     />
      </View>
@@ -349,7 +368,7 @@ dropPickerStyle: {
     },
     Btn:{
         color:'white',
-        marginTop:2,
+        marginTop:-62,
         paddingTop:12,
         textAlign:'center',
         fontSize:28,
@@ -359,4 +378,4 @@ dropPickerStyle: {
     borderRadius:22
 }
 })
-export default TenantRegister;
+export default Register;

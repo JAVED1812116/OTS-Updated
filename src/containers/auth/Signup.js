@@ -8,18 +8,40 @@ const SignUp = (props) => {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [RefferenceCode, setRefferenceCode] = useState("")
+    const [RefferenceCode, setRefferenceCode] =useState ("")
     const [loading, setLoading] = useState(false)
     const [users,setUsers]=useState({})
 
+
+
+    console.log(users,"users");
+    console.log(users.refferenceCode ,"users ref");
+
+
+
     const type=props.route.params.type
-    console.log(type,"type");
+    // console.log(type,"type");
 
         useEffect(()=>{
         allUsers()
     },[])
+
+    const allUsers=()=>{
+        firebase.database().ref("userss")
+        .on("value",snapshot=>{
+            snapshot.forEach(element => {
+                let data=element.val()?element.val():{}
+                setUsers(data)    
+            });
+            
+        })
+    }
     let refferenceCode=Math.floor(Math.random()*1000000) +1;
-    // console.log(refferenceCode,"LOGGGGG");
+    // console.log(users.LandlordRefference,"LOGGGGG");
+
+
+    const Code=parseInt(RefferenceCode);
+    console.log(Code,"CODEEEEEEEEE");
     const signUpUser = () =>{
         setLoading(true)
         firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -64,6 +86,7 @@ const SignUp = (props) => {
 
 
     const signTanent = () =>{
+        if(users.refferenceCode==Code){
         setLoading(true)
         firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(response =>{
@@ -76,7 +99,7 @@ const SignUp = (props) => {
                 email,
                 isActive:"true",
                 type,
-                RefferenceCode
+                RefferenceCode:Code,
             })
             .then(responsee =>{
                 firebase.auth().signOut()
@@ -101,21 +124,18 @@ const SignUp = (props) => {
             alert(errr.message)
             console.log(errr,"ERRRRRRRR");
         })
+    }else
+    {
+        alert("Refference code is wrong")
     }
+}
 
 
-    const allUsers=()=>{
-        firebase.database().ref("userss")
-        .on("value",snapshot=>{
-            // console.log(snapshot.val(),"snapshot====>");
-            let data=snapshot.val()?snapshot.val():{}
-            setUsers(data)
-        })
-    }
 
-const keys=Object.keys(users)
-// console.log(keys,"keys");
-// let mykeys=keys.map(value=>{users[resfrence])
+
+// const keys=Object.keys(users)
+// // console.log(keys,"keys");
+// // let mykeys=keys.map(value=>{users[resfrence])
 
 
     const renderButton = () =>{
@@ -162,8 +182,9 @@ const keys=Object.keys(users)
             )
         }
     }
-    // console.log("NAMEEE==>",name);
-   if(type=="Landlord"){
+
+
+    if(type=="Landlord"){
     return(
         <View style={styles.mainview}>
 <View style={styles.imagess}>

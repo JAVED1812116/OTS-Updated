@@ -48,7 +48,6 @@ const tenantId=user.activeUser
         PreviousReadingk,
         CurrentReadings,
         PreviousReadings,
-        Monthlyrent,
         tenantId
     })
     .then(response =>{
@@ -95,6 +94,8 @@ const tenantId=user.activeUser
           })
       })
   }
+
+  
   
   return (
     <View style={styles.View1}>
@@ -258,7 +259,7 @@ const tenantId=user.activeUser
           </Col>
         </Grid> */}
         <Text style={{color:'#ffcc66',textAlign:'center',fontSize:24}}>{gtotal}</Text>
-        <TouchableOpacity onPress={() =>{setgTotal(SSGC*SSGUnit+total*Unit)}}>
+        <TouchableOpacity onPress={() =>{setgTotal(SSGC*SSGUnit+total*Unit+RentSetting.MonthlyRent+RentSetting.MaintananceCharges+RentSetting.SecurityCharges+RentSetting.TrashCharges)}}>
           <Text style={styles.btn}>Total Bill</Text>
         </TouchableOpacity>
         

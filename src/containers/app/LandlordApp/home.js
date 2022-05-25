@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";
-import { View , Text , TouchableOpacity, ActivityIndicator, TextInput, StyleSheet,Image} from "react-native"
+import { View , Text , TouchableOpacity, ActivityIndicator, TextInput, StyleSheet,Image,Linking} from "react-native"
 import firebase from 'firebase';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import {vw,vh, primaryColor} from "../../../constants";
@@ -26,6 +26,8 @@ const getUserDetails=()=>{
     })
 }
 
+console.log(userDetails.email,"user===>>>");
+
     
     // console.log("NAMEEE==>",name);
     return(
@@ -51,7 +53,8 @@ const getUserDetails=()=>{
 
         <View style={styles.innerview}>
         <TouchableOpacity style={[styles.buttonstyle,{marginTop:92}]}
-            onPress={()=>props.navigation.navigate("NewTenant")}>
+            onPress={() => Linking.openURL(`mailto:${userDetails.email}?subject=Refference Code OTS &body=Refference ${userDetails.refferenceCode} code for OTS app Tenant Login`) }
+            title="otsapp@gmail.com" >
                 <Text style={styles.signuptxt}>
                     Add New Tenant
                 </Text>

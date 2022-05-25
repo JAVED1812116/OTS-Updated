@@ -29,6 +29,27 @@ const AllTenant=(props)=>{
         })
     },[])
 
+
+    useEffect(()=>{
+        getUserDetails()
+    },[])
+
+    // Stetes
+ const[userDetails,setuserDetails]=useState({})
+
+ // User details fetching fnc
+const getUserDetails=()=>{
+ let id=firebase.auth().currentUser.uid
+ firebase.database().ref(`userss/${id}`)
+ .on("value",snapshotttt =>{
+ //  console.log(id,"IDDDDD");
+     // console.log(snapshotttt.val(),"Valuee");
+     setuserDetails(snapshotttt.val())
+ })
+}
+
+console.log(userDetails.refferenceCode,"user===>>>");
+
     const mykeys=tanent ? Object.keys(tanent):[]
     console.log(mykeys,"KEEEEEEESSS");
 
@@ -44,7 +65,7 @@ const AllTenant=(props)=>{
        
        
         {mykeys.map(values => {
-            if (tanent[values].isAccepted==true) {
+            if (tanent[values].isAccepted==true &&tanent[values].MyRefferenceCode==userDetails.refferenceCode) {
                 return(        
                     
                     <TouchableOpacity onPress={()=>props.navigation.navigate("In_Flat",{

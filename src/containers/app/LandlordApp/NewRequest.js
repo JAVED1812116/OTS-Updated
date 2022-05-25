@@ -58,7 +58,7 @@ const keys=array?Object.keys(array):[]
 
             {
               keys.length> 0 ?  keys.map(values=>{
-                //   console.log(values.firstName,"values");
+               if(array[values].MyRefferenceCode==userDetails.refferenceCode){
                 return(
                     <View style={{margin:35}}>
                         <Text style={{color:"white"}}>New Request</Text>
@@ -75,15 +75,15 @@ const keys=array?Object.keys(array):[]
                         </TouchableOpacity>
                     </View>
                 )
+            }else{
+                <View></View>
+            }
                 })
                 :
                 <View>
-                    <Text>JAVED</Text>
+                    <Text>No Request Found</Text>
                 </View>
             }
-
-
-            
         </View>
 
         </View>

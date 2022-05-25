@@ -6,10 +6,11 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { createStackNavigator } from '@react-navigation/stack';
 import TenantHome from '../../containers/app/TenantApp/TenantHome';
-import TenantRegister from '../../containers/app/TenantApp/TenantRegister';
 import Agreement from '../../containers/app/TenantApp/Agreement';
 import Bill from '../../containers/app/TenantApp/Previousbills';
 import OnlinePayment from '../../containers/app/TenantApp/Online_Payment';
+import IntroPage from '../../containers/app/TenantApp/IntroPage';
+import Register from '../../containers/app/TenantApp/Register'
 // import DateWiseBill from '../../containers/app/DateWiseBill';
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator();
@@ -29,6 +30,11 @@ const TenantStack=()=>{
         headerShown:false
       }}
       /> */}
+        <Stack.Screen name="IntroPage" component={IntroPage} 
+      options={{
+        headerShown:false
+      }}
+      />
       
       <Stack.Screen name="TenantHome" component={TenantHome} 
       options={{
@@ -50,6 +56,11 @@ const TenantStack=()=>{
         headerShown:false
       }}
       />
+      <Stack.Screen name="Register" component={Register} 
+      options={{
+        headerShown:false
+      }}
+      />
       
       
     </Stack.Navigator>
@@ -61,11 +72,11 @@ export default function App() {
     
       <Tab.Navigator>
 
-        <Tab.Screen 
+        {/* <Tab.Screen 
         options={{tabBarIcon:()=> <Entypo size={30} 
         name="user" color="black"/>}}
         
-         name="TenantRegister" component={TenantRegister} />
+         name="TenantRegister" component={TenantRegister} /> */}
 
         {/* <Tab.Screen 
         options={{tabBarIcon:()=> <Entypo size={30} name="user" color="black"/>}}

@@ -22,15 +22,17 @@ const RentSetting = () => {
     const [MaintananceCharges, setMaintananceCharges] = useState(0)
     const [SecurityCharges, setSecurityCharges] = useState(0)
     const [TrashCharges, setTrashCharges] = useState(0)
+    const [Advance, setAdvance] = useState(0)
     const[RentSetting,setRentSetting]=useState({})
     const[userDetails,setuserDetails]=useState({})
     const submitRecord = () => {
         firebase.database().ref(`RentSetting/${id}`)
             .set({
-                MonthlyRent,
-                MaintananceCharges,
-                SecurityCharges,
-                TrashCharges
+                MonthlyRent:Mr,
+                MaintananceCharges:Mc,
+                SecurityCharges:Sc,
+                TrashCharges:Tc,
+                Advance:Ac
             })
             .then(response => {
                 // console.log(response,"RESSSSSSSSSS");
@@ -38,6 +40,7 @@ const RentSetting = () => {
                 setMaintananceCharges()
                 setSecurityCharges()
                 setTrashCharges()
+                setAdvance()
                 alert('Saved')
             })
             .catch(eror => {
@@ -64,6 +67,11 @@ const RentSetting = () => {
             setuserDetails(snapshotttt.val())
         })
     }
+    let Mr=parseInt(MonthlyRent)
+    let Mc=parseInt(MaintananceCharges)
+    let Sc=parseInt(SecurityCharges)
+    let Tc=parseInt(TrashCharges)
+    let Ac=parseInt(Advance)
     return (
         <View style={styles.MainView}>
             <Grid>
@@ -111,15 +119,24 @@ const RentSetting = () => {
                     value={TrashCharges}
                     onChangeText={(main) => setTrashCharges(main)}
                 />
+                <TextInput
+                    placeholder='Advance'
+                    placeholderTextColor={'white'}
+                    keyboardType='numeric'
+                    style={styles.txtField}
+                    value={Advance}
+                    onChangeText={(main) => setAdvance(main)}
+                />
                 <TouchableOpacity onPress={submitRecord} >
                     <Text style={styles.btn}>Save</Text>
                 </TouchableOpacity>
         <View style={{marginTop:10}}>
         <Text style={[styles.Heading,{textAlign:'center'}]}>Current Account</Text>
         <Text style={{color:'#ffcc66',fontSize:16}}>Monthly Rent: <Text style={{color:'white'}}>{RentSetting.MonthlyRent}</Text></Text>
-        <Text style={{color:'#ffcc66',fontSize:16}}>Maintanance Charges:<Text style={{color:'white'}}>{RentSetting.MaintananceCharges}</Text></Text>
+        <Text style={{color:'#ffcc66',fontSize:16}}>Advance:<Text style={{color:'white'}}>{RentSetting.Advance}</Text></Text>
         <Text style={{color:'#ffcc66',fontSize:16}}>Security Charges:<Text style={{color:'white'}}>{RentSetting.SecurityCharges}</Text></Text>
         <Text style={{color:'#ffcc66',fontSize:16}}>Trash Charges:<Text style={{color:'white'}}>{RentSetting.TrashCharges}</Text></Text>
+        <Text style={{color:'#ffcc66',fontSize:16}}>Maintanance Charges:<Text style={{color:'white'}}>{RentSetting.MaintananceCharges}</Text></Text>
 </View>
             
         </View>

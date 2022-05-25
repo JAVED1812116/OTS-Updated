@@ -15,7 +15,10 @@ export default function App() {
       SplashScreen.hide()
     },5000)
   },[])
+
+
   const [component, setComponent]= useState(< Loader />)
+  const [userKeys,setUserKeys]=useState({})
 
   useEffect(() =>{
   const firebaseConfig = {
@@ -30,7 +33,8 @@ export default function App() {
   };
 firebase.initializeApp(firebaseConfig); 
 },[])
-
+// console.log(userKeys,"Tanent Data");
+// console.log(userKeys.refferenceCode,"Landlord Data");
 useEffect(()=>{
     setTimeout(() =>{
     firebase.auth().onAuthStateChanged(user =>{
@@ -53,9 +57,30 @@ useEffect(()=>{
 },[])
 
 
+
+
+
+const data=()=>{firebase.database().ref("userss")
+.on("value",snapshot=>{
+snapshot.forEach(element => {
+  // console.log(element.val(),"val");
+  let data=element.val()?element.val():{}
+  setUserKeys(data)
+  // console.log(data,"data");
+});
+   
+ 
+})
+}
+
+useEffect(()=>{
+  data()
+},[])
+
+
   return (
     <NavigationContainer>
       {component}
     </NavigationContainer>
-  );
+  )
 }
