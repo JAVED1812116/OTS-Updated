@@ -1,5 +1,9 @@
-# OTS 
-Group Members:1)Syed Muhammad Abu Talha-1812133,(2)Javed-1812116
+# Project OTS Group Members:1)Syed Muhammad Abu Talha-1812133,(2)Javed-1812116
+Installation:1)Vs Code 2)android studio 
+step-1:npm install
+step-2:react-native run android
+step-3:show output and now you can use easily this application.
+
 !!.......Our Final Project are based on mobile application.......................!!
 It works something like this steps
 Total two pannels 1 is owner pannel 2 is tenant pannel
