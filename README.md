@@ -2,14 +2,14 @@
 !!.......Our Final Project are based on mobile application.......................!!
 It works something like this steps
 Total two pannels 1 is owner pannel 2 is tenant pannel
-........................LANDLORD........................................
-..........................step#1........................................
+LANDLORD:
+step#1
 Both pannel will signup in our application
 landlord side refference code created autometically
 tenant enter same code then they will enter in our application.
-..........................step#2........................................
+step#2
 After login they can use our facilities.
-..........................step#3........................................
+step#3
 Add New Tenant:
 landlord can add multiple tenant when click on this button our application render on Gmail landlord send the code to tenant
 New Request:
