@@ -20,7 +20,7 @@ Decline:
 when press on decline button then our system will send sorry message through via email.
 All Tenant:
 when press on the button of all tenant landlord can see all the tenant which he accepted.
-.......................step#4............................................
+step#4
 Upload Bill:
 landlord can upload the all bills related to rent gass and electricity
 Previous Bills:
@@ -31,10 +31,10 @@ Unregister:
 If landlord want to unregister any person then they can do that.through unregister button when click on this button then 
 our system will alert to the tenant.
 
-.....................................TENANT.....................................
-......................step#1..........................................
+TENANT
+step#1
 fill the all credential then they can enter in our application
-......................step#2..........................................
+step#2
 CurrentBill:
 user can view the lattest bill
 PreviousBill:
