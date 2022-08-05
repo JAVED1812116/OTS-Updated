@@ -1,4 +1,5 @@
-# OTS Group Members:1)Syed Muhammad Abu Talha-1812133,(2)Javed-1812116
+# OTS 
+Group Members:1)Syed Muhammad Abu Talha-1812133,(2)Javed-1812116
 !!.......Our Final Project are based on mobile application.......................!!
 It works something like this steps
 Total two pannels 1 is owner pannel 2 is tenant pannel
